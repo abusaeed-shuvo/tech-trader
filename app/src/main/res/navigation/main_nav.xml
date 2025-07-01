@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android = "http://schemas.android.com/apk/res/android"
+	xmlns:app = "http://schemas.android.com/apk/res-auto"
+	xmlns:tools = "http://schemas.android.com/tools"
+	android:id = "@+id/main_nav"
+	app:startDestination = "@id/startFragment">
+
+	<fragment
+		android:id = "@+id/startFragment"
+		android:name = "com.github.abusaeed_shuvo.techtrader.ui.start.StartFragment"
+		android:label = "Start"
+		tools:layout = "@layout/fragment_start">
+		<action
+			android:id = "@+id/action_startFragment_to_signInFragment"
+			app:destination = "@id/signInFragment" />
+		<action
+			android:id = "@+id/action_startFragment_to_signUpFragment"
+			app:destination = "@id/signUpFragment" />
+	</fragment>
+	<fragment
+		android:id = "@+id/homeFragment"
+		android:name = "com.github.abusaeed_shuvo.techtrader.ui.home.HomeFragment"
+		android:label = "Home"
+		tools:layout = "@layout/fragment_home" />
+	<fragment
+		android:id = "@+id/signInFragment"
+		android:name = "com.github.abusaeed_shuvo.techtrader.ui.signin.SignInFragment"
+		android:label = "Login"
+		tools:layout = "@layout/fragment_sign_in">
+		<action
+			android:id = "@+id/action_signInFragment_to_signUpFragment"
+			app:destination = "@id/signUpFragment" />
+		<action
+			android:id = "@+id/action_signInFragment_to_homeFragment"
+			app:destination = "@id/homeFragment" />
+	</fragment>
+	<fragment
+		android:id = "@+id/signUpFragment"
+		android:name = "com.github.abusaeed_shuvo.techtrader.ui.signup.SignUpFragment"
+		android:label = "Signup"
+		tools:layout = "@layout/fragment_sign_up">
+		<action
+			android:id = "@+id/action_signUpFragment_to_signInFragment"
+			app:destination = "@id/signInFragment" />
+		<action
+			android:id = "@+id/action_signUpFragment_to_homeFragment"
+			app:destination = "@id/homeFragment" />
+	</fragment>
+</navigation>
