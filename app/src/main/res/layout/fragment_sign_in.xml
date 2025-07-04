@@ -1,14 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android = "http://schemas.android.com/apk/res/android"
 	xmlns:tools = "http://schemas.android.com/tools"
 	android:layout_width = "match_parent"
 	android:layout_height = "match_parent"
+	xmlns:app = "http://schemas.android.com/apk/res-auto"
+	android:orientation = "vertical"
+	android:gravity = "center"
 	tools:context = ".ui.signin.SignInFragment">
 
-	<!-- TODO: Update blank fragment layout -->
-	<TextView
+	<com.google.android.material.textfield.TextInputLayout
+		style = "@style/Widget.Material3.TextInputLayout.FilledBox"
 		android:layout_width = "match_parent"
-		android:layout_height = "match_parent"
-		android:text = "@string/hello_blank_fragment" />
+		android:id = "@+id/input_username"
+		app:endIconMode = "clear_text"
+		android:layout_height = "wrap_content"
+		android:hint = "Enter your username:">
 
-</FrameLayout>
+		<com.google.android.material.textfield.TextInputEditText
+			android:layout_width = "match_parent"
+			android:textAppearance = "@style/TextAppearance.Material3.TitleLarge"
+			android:layout_height = "wrap_content" />
+	</com.google.android.material.textfield.TextInputLayout>
+
+	<com.google.android.material.textfield.TextInputLayout
+		style = "@style/Widget.Material3.TextInputLayout.FilledBox"
+		android:layout_width = "match_parent"
+		android:id = "@+id/input_password"
+		app:endIconMode = "clear_text"
+		android:layout_height = "wrap_content"
+		android:hint = "Enter your username:">
+
+		<com.google.android.material.textfield.TextInputEditText
+			android:layout_width = "match_parent"
+			android:textAppearance = "@style/TextAppearance.Material3.TitleLarge"
+			android:layout_height = "wrap_content" />
+	</com.google.android.material.textfield.TextInputLayout>
+</LinearLayout>

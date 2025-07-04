@@ -1,16 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android = "http://schemas.android.com/apk/res/android"
 	xmlns:tools = "http://schemas.android.com/tools"
 	android:layout_width = "match_parent"
 	android:layout_height = "match_parent"
+	xmlns:app = "http://schemas.android.com/apk/res-auto"
+	android:gravity = "center"
+	android:orientation = "vertical"
+	android:padding = "24dp"
 	tools:context = ".ui.start.StartFragment">
 
-	<!-- TODO: Update blank fragment layout -->
 	<TextView
 		android:layout_width = "match_parent"
-		android:layout_height = "match_parent"
-		android:gravity = "center"
-		android:text = "Start fragment"
+		android:layout_height = "wrap_content"
+		android:text = "Welcome to Tech Trader "
+		android:textAlignment = "center"
 		android:textAppearance = "@style/TextAppearance.Material3.TitleLarge" />
 
-</FrameLayout>
+	<com.google.android.material.button.MaterialButton
+		android:layout_width = "match_parent"
+		android:layout_height = "wrap_content"
+		android:text = "Get Started"
+		style = "@style/Widget.Material3.Button.ElevatedButton"
+		app:icon = "@drawable/ic_arrow_right"
+		app:iconGravity = "end"
+		android:layout_marginTop = "20dp"
+		android:backgroundTint = "?attr/colorPrimary"
+		android:textColor = "?attr/colorOnPrimary"
+		app:iconTint = "?attr/colorOnPrimary"
+		android:id = "@+id/btn_get_started"
+
+		/>
+
+</LinearLayout>
