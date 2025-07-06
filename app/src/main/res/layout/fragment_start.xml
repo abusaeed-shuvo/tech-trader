@@ -36,7 +36,8 @@
 		app:icon = "@drawable/ic_arrow_right"
 		app:iconTint = "?attr/colorOnPrimary" />
 
-	<TextView
+	<com.google.android.material.button.MaterialButton
+		style = "@style/Widget.Material3.Button.TextButton"
 		android:layout_marginTop = "5dp"
 		android:id = "@+id/btn_register"
 		android:layout_width = "match_parent"
