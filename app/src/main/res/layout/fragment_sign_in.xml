@@ -1,38 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+	xmlns:app = "http://schemas.android.com/apk/res-auto"
 	xmlns:tools = "http://schemas.android.com/tools"
 	android:layout_width = "match_parent"
 	android:layout_height = "match_parent"
-	xmlns:app = "http://schemas.android.com/apk/res-auto"
-	android:orientation = "vertical"
 	android:gravity = "center"
+	android:orientation = "vertical"
 	tools:context = ".ui.signin.SignInFragment">
 
-	<com.google.android.material.textfield.TextInputLayout
-		style = "@style/Widget.Material3.TextInputLayout.FilledBox"
+	<ScrollView
 		android:layout_width = "match_parent"
-		android:id = "@+id/input_username"
-		app:endIconMode = "clear_text"
 		android:layout_height = "wrap_content"
-		android:hint = "Enter your username:">
+		android:layout_gravity = "center"
+		android:padding = "16dp"
 
-		<com.google.android.material.textfield.TextInputEditText
+		>
+
+
+		<LinearLayout
 			android:layout_width = "match_parent"
-			android:textAppearance = "@style/TextAppearance.Material3.TitleLarge"
-			android:layout_height = "wrap_content" />
-	</com.google.android.material.textfield.TextInputLayout>
+			android:layout_height = "wrap_content"
+			android:orientation = "vertical">
 
-	<com.google.android.material.textfield.TextInputLayout
-		style = "@style/Widget.Material3.TextInputLayout.FilledBox"
-		android:layout_width = "match_parent"
-		android:id = "@+id/input_password"
-		app:endIconMode = "clear_text"
-		android:layout_height = "wrap_content"
-		android:hint = "Enter your username:">
+			<com.google.android.material.imageview.ShapeableImageView
+				android:layout_width = "150dp"
+				android:layout_height = "150dp"
+				android:layout_gravity = "center"
+				android:layout_marginBottom = "15dp"
+				android:contentDescription = "app logo"
+				app:srcCompat = "@mipmap/ic_launcher_round" />
 
-		<com.google.android.material.textfield.TextInputEditText
-			android:layout_width = "match_parent"
-			android:textAppearance = "@style/TextAppearance.Material3.TitleLarge"
-			android:layout_height = "wrap_content" />
-	</com.google.android.material.textfield.TextInputLayout>
-</LinearLayout>
+			<com.google.android.material.textview.MaterialTextView
+				android:layout_width = "match_parent"
+				android:layout_height = "wrap_content"
+				android:layout_marginVertical = "5dp"
+				android:text = "Login to your account"
+				android:textAlignment = "center"
+				android:textAppearance = "@style/TextAppearance.Material3.TitleLarge" />
+
+
+			<com.google.android.material.textfield.TextInputLayout
+				android:id = "@+id/input_username"
+				style = "@style/Widget.Material3.TextInputLayout.FilledBox"
+				android:layout_width = "match_parent"
+				android:layout_height = "wrap_content"
+				android:layout_marginVertical = "2dp"
+				android:hint = "Enter your username:"
+				app:endIconMode = "clear_text"
+				app:startIconDrawable = "@drawable/ic_user">
+
+				<com.google.android.material.textfield.TextInputEditText
+					android:layout_width = "match_parent"
+					android:layout_height = "wrap_content"
+					android:imeOptions = "actionNext"
+					android:inputType = "text"
+					android:textAppearance = "@style/TextAppearance.Material3.TitleLarge" />
+			</com.google.android.material.textfield.TextInputLayout>
+
+			<com.google.android.material.textfield.TextInputLayout
+				android:id = "@+id/input_password"
+				style = "@style/Widget.Material3.TextInputLayout.FilledBox"
+				android:layout_width = "match_parent"
+				android:layout_height = "wrap_content"
+				android:layout_marginVertical = "2dp"
+				android:hint = "Enter your pasword:"
+				app:endIconMode = "password_toggle"
+				app:startIconDrawable = "@drawable/ic_key">
+
+				<com.google.android.material.textfield.TextInputEditText
+					android:layout_width = "match_parent"
+					android:layout_height = "wrap_content"
+					android:imeOptions = "actionDone"
+					android:inputType = "textPassword"
+					android:textAppearance = "@style/TextAppearance.Material3.TitleLarge" />
+			</com.google.android.material.textfield.TextInputLayout>
+
+			<com.google.android.material.button.MaterialButton
+				android:id = "@+id/btn_login"
+				style = "@style/Widget.Material3.Button.ElevatedButton"
+				android:layout_width = "match_parent"
+				android:layout_height = "wrap_content"
+				android:layout_marginVertical = "2dp"
+				android:backgroundTint = "?attr/colorPrimary"
+				android:text = "Login"
+				android:textAppearance = "@style/TextAppearance.Material3.TitleLarge"
+				android:textColor = "?attr/colorOnPrimary" />
+
+			<com.google.android.material.textview.MaterialTextView
+				android:layout_width = "match_parent"
+				android:layout_height = "wrap_content"
+				android:layout_marginVertical = "2dp"
+				android:text = "Don't have an account"
+				android:id = "@+id/btn_create_account"
+				android:textAlignment = "center"
+				android:textAppearance = "@style/TextAppearance.Material3.TitleSmall"
+				android:textColor = "?attr/colorOnSurface" />
+
+		</LinearLayout>
+	</ScrollView>
+
+</FrameLayout>
