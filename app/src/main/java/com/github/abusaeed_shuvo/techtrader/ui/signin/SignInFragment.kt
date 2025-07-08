@@ -46,8 +46,6 @@ class SignInFragment : Fragment() {
 				}
 				return@setOnClickListener
 			}
-
-
 			findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
 		}
 

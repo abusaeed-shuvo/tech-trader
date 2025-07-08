@@ -70,24 +70,22 @@ class SignUpFragment : Fragment() {
 		}
 		inputEmail.editText?.doOnTextChanged { input, start, end, count ->
 			inputEmail.error = if (input.toString().isBlank()) "Email can't be blank!" else null
-
 		}
 
 		inputPassword.editText?.doOnTextChanged { input, start, end, count ->
 			inputPassword.error = if (input.toString().isEmpty()) {
 				"Password can't be empty!"
-			} else if (count > 68) {
+			} else if (count > 64) {
 				"Password can't be longer than 64"
 			} else {
 				null
 			}
 
-
 		}
 		inputPasswordConfirm.editText?.doOnTextChanged { input, start, end, count ->
 			inputPasswordConfirm.error = if (input.toString().isEmpty()) {
 				"Password can't be empty!"
-			} else if (count > 68) {
+			} else if (count > 64) {
 				"Password can't be longer than 64"
 			} else {
 				null
