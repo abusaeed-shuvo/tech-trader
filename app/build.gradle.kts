@@ -64,4 +64,10 @@ dependencies {
 	testImplementation(libs.junit)
 	androidTestImplementation(libs.androidx.junit)
 	androidTestImplementation(libs.androidx.espresso.core)
+
+	//lottie
+	implementation(libs.lottie)
+
+	//glide
+	implementation(libs.glide)
 }

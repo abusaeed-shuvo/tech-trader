@@ -157,6 +157,7 @@
 				android:layout_marginVertical = "2dp"
 				android:backgroundTint = "?attr/colorPrimary"
 				android:text = "Register"
+				android:enabled = "true"
 				android:textAppearance = "@style/TextAppearance.Material3.TitleLarge"
 				android:textColor = "?attr/colorOnPrimary" />
 
