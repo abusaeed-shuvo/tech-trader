@@ -1,18 +1,24 @@
 package com.github.abusaeed_shuvo.techtrader.ui.signin
 
 import android.os.Bundle
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.github.abusaeed_shuvo.techtrader.R
+import com.github.abusaeed_shuvo.techtrader.data.enums.FieldType
+import com.github.abusaeed_shuvo.techtrader.data.models.UserLogin
 import com.github.abusaeed_shuvo.techtrader.databinding.FragmentSignInBinding
+import com.github.abusaeed_shuvo.techtrader.libs.setLoading
+import com.github.abusaeed_shuvo.techtrader.libs.setupFieldValidation
 
 class SignInFragment : Fragment() {
 	private var _binding: FragmentSignInBinding? = null
 	private val binding get() = _binding!!
+	private val viewModel: SignInViewModel by viewModels()
 
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,
@@ -31,19 +37,23 @@ class SignInFragment : Fragment() {
 	private fun setListener() = with(binding) {
 
 		btnLogin.setOnClickListener {
-			val user = inputUsername.editText?.text.toString().trim()
+			val email = inputEmail.editText?.text.toString().trim()
 			val password = inputPassword.editText?.text.toString()
 
-			if (user.isBlank() || password.isEmpty()) {
-				if (user.isBlank()) {
-					inputUsername.error = "User Name can't be blank!"
-				}
-				if (password.isEmpty()) {
-					inputPassword.error = "Password can't be empty!"
-				}
+			if (isFormBlank()) {
 				return@setOnClickListener
 			}
-			findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
+			if (isFormIncomplete()) {
+				return@setOnClickListener
+			}
+			val user = UserLogin(
+				email,
+				password
+			)
+
+			viewModel.userLogin(user, binding.root)
+
+
 		}
 
 		btnCreateAccount.setOnClickListener {
@@ -53,21 +63,60 @@ class SignInFragment : Fragment() {
 	}
 
 	private fun setObservers() = with(binding) {
-		inputUsername.editText?.doOnTextChanged { input, start, before, count ->
-			inputUsername.error =
-				if (input.toString().isBlank()) "User name cannot be blank!" else null
+
+		val fieldMappings = mapOf(
+			inputEmail to FieldType.EMAIL,
+			inputPassword to FieldType.PASSWORD,
+		)
+		fieldMappings.forEach { (inputLayout, fieldType) ->
+			setupFieldValidation(inputLayout, fieldType)
 		}
-		inputPassword.editText?.doOnTextChanged { input, start, before, count ->
-			inputPassword.error =
-				if (input.toString().isEmpty()) "Password cannot be blank!" else null
+		viewModel.isLoading.observe(viewLifecycleOwner) { loading ->
+			setLoading(loading, btnLogin, "Login")
+
+		}
+		viewModel.navigate.observe(viewLifecycleOwner) { navigate ->
+			if (navigate) {
+				findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
+			}
+		}
+	}
+
+	private fun isFormBlank(): Boolean = with(binding) {
+		val email = inputEmail.editText?.text.toString().trim()
+		val password = inputPassword.editText?.text.toString()
+
+		if (email.isBlank()) {
+			inputEmail.error = "User Name can't be blank!"
+		}
+		if (password.isEmpty()) {
+			inputPassword.error = "Password can't be empty!"
 		}
 
+		return email.isBlank() || password.isEmpty()
+	}
 
+	private fun isFormIncomplete(): Boolean {
+		val email = binding.inputEmail.editText?.text.toString()
+		val isEmailIncomplete = !Patterns.EMAIL_ADDRESS.matcher(email).matches()
+		val password = binding.inputPassword.editText?.text.toString()
+		val isPassWordTooSort = password.length < 5
+
+		if (isEmailIncomplete) {
+			binding.inputEmail.error = "Invalid Email"
+		}
+		if (isPassWordTooSort) {
+			binding.inputPassword.error = "Password must be at least 6 character long!"
+
+		}
+
+		return isEmailIncomplete
 	}
 
 	override fun onDestroyView() {
 		super.onDestroyView()
 		_binding = null
+		viewModel.resetNav()
 	}
 
 }

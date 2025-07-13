@@ -60,9 +60,8 @@ class SignUpFragment : Fragment() {
 				"Seller"
 			)
 
-			viewModel.userSignup(userSignup)
+			viewModel.userSignup(userSignup, binding.root)
 
-			findNavController().navigate(R.id.action_signUpFragment_to_homeFragment)
 
 		}
 		btnLogin.setOnClickListener {
@@ -85,11 +84,11 @@ class SignUpFragment : Fragment() {
 			setLoading(loading, btnSignup, "Register")
 
 		}
-//		viewModel.navigate.observe(viewLifecycleOwner) { navigate ->
-//			if (navigate) {
-//				findNavController().navigate(R.id.action_signUpFragment_to_homeFragment)
-//			}
-//		}
+		viewModel.navigate.observe(viewLifecycleOwner) { navigate ->
+			if (navigate) {
+				findNavController().navigate(R.id.action_signUpFragment_to_homeFragment)
+			}
+		}
 
 	}
 
@@ -145,5 +144,6 @@ class SignUpFragment : Fragment() {
 	override fun onDestroyView() {
 		super.onDestroyView()
 		_binding = null
+		viewModel.resetNav()
 	}
 }

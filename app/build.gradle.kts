@@ -70,4 +70,9 @@ dependencies {
 
 	//glide
 	implementation(libs.glide)
+
+	//ssp sdp
+	implementation("com.intuit.ssp:ssp-android:1.1.1")
+	implementation("com.intuit.sdp:sdp-android:1.1.1")
+
 }
