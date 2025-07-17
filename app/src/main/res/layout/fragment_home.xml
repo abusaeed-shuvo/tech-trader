@@ -7,14 +7,19 @@
 
 	<LinearLayout
 		android:layout_width = "match_parent"
-		android:layout_height = "wrap_content"
-		android:orientation = "vertical">
+		android:layout_height = "match_parent"
+		android:orientation = "vertical"
+		android:gravity = "center">
 
 
-		<ListView
+		<TextView
 			android:layout_width = "match_parent"
 			android:layout_height = "wrap_content"
-			android:id = "@+id/list_user" />
+			android:id = "@+id/tv_email"
+			android:layout_gravity = "center"
+			android:text = "email"
+			android:textAlignment = "center"
+			android:textAppearance = "@style/TextAppearance.Material3.TitleLarge" />
 	</LinearLayout>
 
 

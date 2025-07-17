@@ -36,22 +36,17 @@ class SignUpFragment : Fragment() {
 	}
 
 	private fun setListener() = with(binding) {
-
-
 		btnSignup.setOnClickListener {
 			val user = inputName.editText?.text.toString().trim()
 			val password = inputPassword.editText?.text.toString()
 			val email = inputEmail.editText?.text.toString().trim()
 			val confirm = inputPasswordConfirm.editText?.text.toString()
-
 			if (isFormBlank()) {
 				return@setOnClickListener
 			}
-
 			if (isFormIncomplete()) {
 				return@setOnClickListener
 			}
-
 			val userSignup = UserSignup(
 				"",
 				user,
@@ -59,10 +54,7 @@ class SignUpFragment : Fragment() {
 				password,
 				"Seller"
 			)
-
 			viewModel.userSignup(userSignup, binding.root)
-
-
 		}
 		btnLogin.setOnClickListener {
 			findNavController().navigate(R.id.action_signUpFragment_to_signInFragment)
@@ -79,31 +71,23 @@ class SignUpFragment : Fragment() {
 		fieldMappings.forEach { (inputLayout, fieldType) ->
 			setupFieldValidation(inputLayout, fieldType)
 		}
-
 		viewModel.isLoading.observe(viewLifecycleOwner) { loading ->
 			setLoading(loading, btnSignup, "Register")
-
 		}
 		viewModel.navigate.observe(viewLifecycleOwner) { navigate ->
 			if (navigate) {
 				findNavController().navigate(R.id.action_signUpFragment_to_homeFragment)
 			}
 		}
-
 	}
 
 	private fun isFormIncomplete(): Boolean {
-
 		val email = binding.inputEmail.editText?.text.toString()
 		val isEmailIncomplete = !Patterns.EMAIL_ADDRESS.matcher(email).matches()
-
-
 		val password = binding.inputPassword.editText?.text.toString()
 		val confirm = binding.inputPasswordConfirm.editText?.text.toString()
-
 		val isPasswordDoesNotMatch = password != confirm
 		val passwordTooSmall = password.length < 5
-
 		if (isEmailIncomplete) {
 			binding.inputEmail.error = "Invalid Email"
 		}
@@ -113,7 +97,6 @@ class SignUpFragment : Fragment() {
 		if (passwordTooSmall) {
 			binding.inputPassword.error = "Password must be at least 6 character long!"
 		}
-
 		return isEmailIncomplete || isPasswordDoesNotMatch || passwordTooSmall
 	}
 

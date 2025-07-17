@@ -36,6 +36,7 @@ android {
 		viewBinding = true
 	}
 	buildToolsVersion = "36.0.0"
+	ndkVersion = "29.0.13599879 rc2"
 
 }
 
@@ -60,6 +61,9 @@ dependencies {
 	implementation(libs.androidx.navigation.fragment.ktx)
 	implementation(libs.androidx.navigation.ui.ktx)
 	implementation(libs.androidx.fragment)
+	implementation(libs.androidx.annotation)
+	implementation(libs.androidx.lifecycle.livedata.ktx)
+	implementation(libs.androidx.lifecycle.viewmodel.ktx)
 
 	testImplementation(libs.junit)
 	androidTestImplementation(libs.androidx.junit)

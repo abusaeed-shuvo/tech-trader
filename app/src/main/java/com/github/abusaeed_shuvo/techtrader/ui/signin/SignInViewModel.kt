@@ -23,28 +23,22 @@ class SignInViewModel : ViewModel() {
 	fun userLogin(userLogin: UserLogin, view: View) {
 		val authService = AuthRepository()
 		_isLoading.value = true
-
 		viewModelScope.launch {
-
 			try {
 				val result: AuthResult = authService.userLogin(userLogin).await()
 				Log.d(TAG, "userLogin: Success - ${result.user?.email}")
 				val msg = "$TAG ${result.user?.email} successfully!"
 				Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show()
-
 				_navigate.value = true
 			} catch (e: Exception) {
 				Log.d(TAG, "userLogin: Failed-${e.message}")
 				val msg = "$TAG failed-${e.message}"
 				Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show()
-
 				_navigate.value = false
 			} finally {
 				_isLoading.value = false
 			}
-
 		}
-
 	}
 
 

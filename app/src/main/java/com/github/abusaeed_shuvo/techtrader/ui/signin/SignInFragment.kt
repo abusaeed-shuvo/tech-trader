@@ -35,11 +35,9 @@ class SignInFragment : Fragment() {
 	}
 
 	private fun setListener() = with(binding) {
-
 		btnLogin.setOnClickListener {
 			val email = inputEmail.editText?.text.toString().trim()
 			val password = inputPassword.editText?.text.toString()
-
 			if (isFormBlank()) {
 				return@setOnClickListener
 			}
@@ -50,20 +48,14 @@ class SignInFragment : Fragment() {
 				email,
 				password
 			)
-
 			viewModel.userLogin(user, binding.root)
-
-
 		}
-
 		btnCreateAccount.setOnClickListener {
 			findNavController().navigate(R.id.action_signInFragment_to_signUpFragment)
 		}
-
 	}
 
 	private fun setObservers() = with(binding) {
-
 		val fieldMappings = mapOf(
 			inputEmail to FieldType.EMAIL,
 			inputPassword to FieldType.PASSWORD,
@@ -73,7 +65,6 @@ class SignInFragment : Fragment() {
 		}
 		viewModel.isLoading.observe(viewLifecycleOwner) { loading ->
 			setLoading(loading, btnLogin, "Login")
-
 		}
 		viewModel.navigate.observe(viewLifecycleOwner) { navigate ->
 			if (navigate) {
@@ -85,14 +76,12 @@ class SignInFragment : Fragment() {
 	private fun isFormBlank(): Boolean = with(binding) {
 		val email = inputEmail.editText?.text.toString().trim()
 		val password = inputPassword.editText?.text.toString()
-
 		if (email.isBlank()) {
 			inputEmail.error = "User Name can't be blank!"
 		}
 		if (password.isEmpty()) {
 			inputPassword.error = "Password can't be empty!"
 		}
-
 		return email.isBlank() || password.isEmpty()
 	}
 
@@ -101,15 +90,12 @@ class SignInFragment : Fragment() {
 		val isEmailIncomplete = !Patterns.EMAIL_ADDRESS.matcher(email).matches()
 		val password = binding.inputPassword.editText?.text.toString()
 		val isPassWordTooSort = password.length < 5
-
 		if (isEmailIncomplete) {
 			binding.inputEmail.error = "Invalid Email"
 		}
 		if (isPassWordTooSort) {
 			binding.inputPassword.error = "Password must be at least 6 character long!"
-
 		}
-
 		return isEmailIncomplete
 	}
 

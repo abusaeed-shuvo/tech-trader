@@ -1,6 +1,12 @@
 package com.github.abusaeed_shuvo.techtrader
 
+import android.app.Activity
+import android.graphics.Rect
 import android.os.Bundle
+import android.view.MotionEvent
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -28,24 +34,24 @@ class MainActivity : AppCompatActivity() {
 		}
 	}
 
-//	fun Activity.hideKeyboard(view: View) {
-//		val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-//		imm?.hideSoftInputFromWindow(view.windowToken, 0)
-//	}
-//
-//	override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-//		if (ev.action == MotionEvent.ACTION_DOWN) {
-//			currentFocus?.let { focusedView ->
-//				if (focusedView is EditText) {
-//					val outRect = Rect()
-//					focusedView.getGlobalVisibleRect(outRect)
-//					if (!outRect.contains(ev.rawX.toInt(), ev.rawY.toInt())) {
-//						focusedView.clearFocus()
-//						hideKeyboard(focusedView)
-//					}
-//				}
-//			}
-//		}
-//		return super.dispatchTouchEvent(ev)
-//	}
+	fun Activity.hideKeyboard(view: View) {
+		val imm = getSystemService(INPUT_METHOD_SERVICE) as? InputMethodManager
+		imm?.hideSoftInputFromWindow(view.windowToken, 0)
+	}
+
+	override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+		if (ev.action == MotionEvent.ACTION_DOWN) {
+			currentFocus?.let { focusedView ->
+				if (focusedView is EditText) {
+					val outRect = Rect()
+					focusedView.getGlobalVisibleRect(outRect)
+					if (!outRect.contains(ev.rawX.toInt(), ev.rawY.toInt())) {
+						focusedView.clearFocus()
+						hideKeyboard(focusedView)
+					}
+				}
+			}
+		}
+		return super.dispatchTouchEvent(ev)
+	}
 }
