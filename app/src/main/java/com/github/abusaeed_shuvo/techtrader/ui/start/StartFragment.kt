@@ -1,33 +1,15 @@
 package com.github.abusaeed_shuvo.techtrader.ui.start
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.github.abusaeed_shuvo.techtrader.R
+import com.github.abusaeed_shuvo.techtrader.base.BaseFragment
 import com.github.abusaeed_shuvo.techtrader.databinding.FragmentStartBinding
 
 
-class StartFragment : Fragment() {
-	private var _binding: FragmentStartBinding? = null
-	private val binding get() = _binding!!
+class StartFragment : BaseFragment<FragmentStartBinding>(FragmentStartBinding::inflate) {
 
-	override fun onCreateView(
-		inflater: LayoutInflater, container: ViewGroup?,
-		savedInstanceState: Bundle?
-	): View? {
-		_binding = FragmentStartBinding.inflate(inflater, container, false)
-		return binding.root
-	}
 
-	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-		super.onViewCreated(view, savedInstanceState)
-		setListeners()
-	}
-
-	fun setListeners() = with(binding) {
+	override fun setListener() = with(binding) {
 		btnGetStarted.setOnClickListener {
 			findNavController().navigate(R.id.action_startFragment_to_signInFragment)
 		}
@@ -36,9 +18,9 @@ class StartFragment : Fragment() {
 		}
 	}
 
-	override fun onDestroyView() {
-		super.onDestroyView()
-		_binding = null
+	override fun setObserver() {
+
 	}
+
 
 }

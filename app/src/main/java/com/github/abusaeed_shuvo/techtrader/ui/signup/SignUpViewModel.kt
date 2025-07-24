@@ -1,52 +1,37 @@
 package com.github.abusaeed_shuvo.techtrader.ui.signup
 
 import android.util.Log
-import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.abusaeed_shuvo.techtrader.data.models.UserSignup
 import com.github.abusaeed_shuvo.techtrader.data.repository.AuthRepository
-import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.AuthResult
+import com.github.abusaeed_shuvo.techtrader.data.state.DataState
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
 
 class SignUpViewModel : ViewModel() {
-	private val _isLoading = MutableLiveData(false)
-	private val _navigate = MutableLiveData(false)
-	val isLoading get() = _isLoading
-	val navigate get() = _navigate
+
+	private val _registrationResponse = MutableLiveData<DataState<UserSignup>>()
+	val registrationResponse get() = _registrationResponse
 
 	val TAG = "SIGNUP"
 
-	fun userSignup(userSignup: UserSignup, view: View) {
+	fun userSignup(userSignup: UserSignup) {
 		val authService = AuthRepository()
-		_isLoading.value = true
+		_registrationResponse.postValue(DataState.Loading())
 		viewModelScope.launch {
 
-			try {
-				val result: AuthResult = authService.userRegistration(userSignup).await()
-				Log.d(TAG, "Register: Success - ${result.user?.email}")
-				val msg = "$TAG ${result.user?.email} successfully!"
-				Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show()
+			authService.userRegistration(userSignup).addOnSuccessListener {
+				_registrationResponse.postValue(DataState.Success(userSignup))
+				Log.d(TAG, "Register: Success - ${it.user?.email}")
 
-				_navigate.value = true
-			} catch (e: Exception) {
-				Log.d(TAG, "Register: Failed-${e.message}")
-				val msg = "$TAG failed-${e.message}"
-				Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show()
-
-				_navigate.value = false
-			} finally {
-				_isLoading.value = false
+			}.addOnFailureListener { exception ->
+				_registrationResponse.postValue(DataState.Error(exception.message))
+				Log.d(TAG, "Register: Failed-${exception.message}")
 			}
 
 		}
 	}
 
-	fun resetNav() {
-		_navigate.value = false
-	}
 
 }

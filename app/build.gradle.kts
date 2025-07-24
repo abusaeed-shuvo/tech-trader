@@ -4,6 +4,8 @@ plugins {
 	alias(libs.plugins.android.application)
 	alias(libs.plugins.kotlin.android)
 	alias(libs.plugins.google.gms.google.services)
+	alias(libs.plugins.kotlin.ksp)
+	alias(libs.plugins.android.hilt)
 }
 
 android {
@@ -64,6 +66,7 @@ dependencies {
 	implementation(libs.androidx.annotation)
 	implementation(libs.androidx.lifecycle.livedata.ktx)
 	implementation(libs.androidx.lifecycle.viewmodel.ktx)
+	implementation(libs.androidx.hilt.compiler)
 
 	testImplementation(libs.junit)
 	androidTestImplementation(libs.androidx.junit)
@@ -78,5 +81,9 @@ dependencies {
 	//ssp sdp
 	implementation("com.intuit.ssp:ssp-android:1.1.1")
 	implementation("com.intuit.sdp:sdp-android:1.1.1")
+
+	//hilt
+	implementation(libs.androidx.hilt.dagger)
+	ksp(libs.androidx.hilt.compiler)
 
 }

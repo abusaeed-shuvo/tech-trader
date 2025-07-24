@@ -1,5 +1,7 @@
 package com.github.abusaeed_shuvo.techtrader.libs
 
+import android.app.ProgressDialog
+import android.content.Context
 import androidx.core.widget.doOnTextChanged
 import com.github.abusaeed_shuvo.techtrader.data.enums.FieldType
 import com.google.android.material.button.MaterialButton
@@ -22,4 +24,16 @@ fun setLoading(isLoading: Boolean, button: MaterialButton, btnText: String) {
 		button.isEnabled = true
 		button.text = btnText
 	}
+}
+
+class LoadingDialog(context: Context) {
+	private val dialog: ProgressDialog = ProgressDialog(context)
+
+	init {
+		dialog.setTitle("Loading...")
+		dialog.setMessage("Please wait.")
+	}
+
+	fun show() = dialog.show()
+	fun dismiss() = dialog.dismiss()
 }

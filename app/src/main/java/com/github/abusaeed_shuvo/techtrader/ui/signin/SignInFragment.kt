@@ -1,40 +1,29 @@
 package com.github.abusaeed_shuvo.techtrader.ui.signin
 
-import android.os.Bundle
 import android.util.Patterns
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.github.abusaeed_shuvo.techtrader.R
+import com.github.abusaeed_shuvo.techtrader.base.BaseFragment
 import com.github.abusaeed_shuvo.techtrader.data.enums.FieldType
 import com.github.abusaeed_shuvo.techtrader.data.models.UserLogin
+import com.github.abusaeed_shuvo.techtrader.data.state.DataState
 import com.github.abusaeed_shuvo.techtrader.databinding.FragmentSignInBinding
-import com.github.abusaeed_shuvo.techtrader.libs.setLoading
 import com.github.abusaeed_shuvo.techtrader.libs.setupFieldValidation
+import com.google.android.material.snackbar.Snackbar
 
-class SignInFragment : Fragment() {
-	private var _binding: FragmentSignInBinding? = null
-	private val binding get() = _binding!!
+class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding::inflate) {
 	private val viewModel: SignInViewModel by viewModels()
 
-	override fun onCreateView(
-		inflater: LayoutInflater, container: ViewGroup?,
-		savedInstanceState: Bundle?
-	): View? {
-		_binding = FragmentSignInBinding.inflate(inflater, container, false)
-		return binding.root
-	}
 
-	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-		super.onViewCreated(view, savedInstanceState)
-		setListener()
-		setObservers()
-	}
-
-	private fun setListener() = with(binding) {
+	override fun setListener() = with(binding) {
+		val fieldMappings = mapOf(
+			inputEmail to FieldType.EMAIL,
+			inputPassword to FieldType.PASSWORD,
+		)
+		fieldMappings.forEach { (inputLayout, fieldType) ->
+			setupFieldValidation(inputLayout, fieldType)
+		}
 		btnLogin.setOnClickListener {
 			val email = inputEmail.editText?.text.toString().trim()
 			val password = inputPassword.editText?.text.toString()
@@ -48,27 +37,37 @@ class SignInFragment : Fragment() {
 				email,
 				password
 			)
-			viewModel.userLogin(user, binding.root)
+			viewModel.userLogin(user)
 		}
 		btnCreateAccount.setOnClickListener {
 			findNavController().navigate(R.id.action_signInFragment_to_signUpFragment)
 		}
 	}
 
-	private fun setObservers() = with(binding) {
-		val fieldMappings = mapOf(
-			inputEmail to FieldType.EMAIL,
-			inputPassword to FieldType.PASSWORD,
-		)
-		fieldMappings.forEach { (inputLayout, fieldType) ->
-			setupFieldValidation(inputLayout, fieldType)
-		}
-		viewModel.isLoading.observe(viewLifecycleOwner) { loading ->
-			setLoading(loading, btnLogin, "Login")
-		}
-		viewModel.navigate.observe(viewLifecycleOwner) { navigate ->
-			if (navigate) {
-				findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
+	override fun setObserver() = with(binding) {
+
+		viewModel.loginResponse.observe(viewLifecycleOwner) { dataState ->
+			when (dataState) {
+				is DataState.Error   -> {
+					loading.dismiss()
+					Snackbar.make(binding.root, "${dataState.message}", Snackbar.LENGTH_SHORT)
+						.show()
+				}
+
+				is DataState.Loading -> {
+					loading.show()
+					Snackbar.make(binding.root, "Loading...", Snackbar.LENGTH_SHORT).show()
+				}
+
+				is DataState.Success -> {
+					loading.dismiss()
+					findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
+					Snackbar.make(
+						binding.root,
+						"${dataState.data?.email} login",
+						Snackbar.LENGTH_SHORT
+					).show()
+				}
 			}
 		}
 	}
@@ -99,10 +98,5 @@ class SignInFragment : Fragment() {
 		return isEmailIncomplete
 	}
 
-	override fun onDestroyView() {
-		super.onDestroyView()
-		_binding = null
-		viewModel.resetNav()
-	}
 
 }
