@@ -7,9 +7,15 @@ import androidx.lifecycle.viewModelScope
 import com.github.abusaeed_shuvo.techtrader.data.models.UserSignup
 import com.github.abusaeed_shuvo.techtrader.data.repository.AuthRepository
 import com.github.abusaeed_shuvo.techtrader.data.state.DataState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SignUpViewModel : ViewModel() {
+
+@HiltViewModel
+class SignUpViewModel @Inject constructor(
+	private val authService: AuthRepository
+) : ViewModel() {
 
 	private val _registrationResponse = MutableLiveData<DataState<UserSignup>>()
 	val registrationResponse get() = _registrationResponse
@@ -17,7 +23,6 @@ class SignUpViewModel : ViewModel() {
 	val TAG = "SIGNUP"
 
 	fun userSignup(userSignup: UserSignup) {
-		val authService = AuthRepository()
 		_registrationResponse.postValue(DataState.Loading())
 		viewModelScope.launch {
 

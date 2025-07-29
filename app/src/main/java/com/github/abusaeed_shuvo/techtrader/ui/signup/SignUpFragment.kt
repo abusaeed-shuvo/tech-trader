@@ -11,8 +11,9 @@ import com.github.abusaeed_shuvo.techtrader.data.state.DataState
 import com.github.abusaeed_shuvo.techtrader.databinding.FragmentSignUpBinding
 import com.github.abusaeed_shuvo.techtrader.libs.setupFieldValidation
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding::inflate) {
 
 	private val viewModel: SignUpViewModel by viewModels()
