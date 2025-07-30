@@ -66,6 +66,7 @@ dependencies {
 	implementation(libs.androidx.annotation)
 	implementation(libs.androidx.lifecycle.livedata.ktx)
 	implementation(libs.androidx.lifecycle.viewmodel.ktx)
+	implementation(libs.firebase.firestore)
 
 	testImplementation(libs.junit)
 	androidTestImplementation(libs.androidx.junit)

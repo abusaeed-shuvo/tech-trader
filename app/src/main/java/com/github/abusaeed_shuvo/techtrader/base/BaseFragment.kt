@@ -32,6 +32,7 @@ abstract class BaseFragment<VB : ViewBinding>(
 		setObserver()
 	}
 
+
 	abstract fun setListener()
 	abstract fun setObserver()
 

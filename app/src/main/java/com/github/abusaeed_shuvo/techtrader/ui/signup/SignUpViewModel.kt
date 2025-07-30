@@ -26,9 +26,19 @@ class SignUpViewModel @Inject constructor(
 		_registrationResponse.postValue(DataState.Loading())
 		viewModelScope.launch {
 
-			authService.userRegistration(userSignup).addOnSuccessListener {
-				_registrationResponse.postValue(DataState.Success(userSignup))
-				Log.d(TAG, "Register: Success - ${it.user?.email}")
+			authService.userRegistration(userSignup).addOnSuccessListener { authResult ->
+				authResult.user?.let {
+					userSignup.id = it.uid
+				}
+
+				authService.createUser(userSignup).addOnSuccessListener {
+					_registrationResponse.postValue(DataState.Success(userSignup))
+					Log.d(TAG, "Register: Success - ${authResult.user?.email}")
+				}.addOnFailureListener { exception ->
+					_registrationResponse.postValue(DataState.Error(exception.message))
+					Log.d(TAG, "Register: Failed-${exception.message}")
+				}
+
 
 			}.addOnFailureListener { exception ->
 				_registrationResponse.postValue(DataState.Error(exception.message))

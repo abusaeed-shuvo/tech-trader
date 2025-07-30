@@ -1,10 +1,15 @@
 package com.github.abusaeed_shuvo.techtrader.libs
 
-import android.app.ProgressDialog
 import android.content.Context
+import android.graphics.Color
+import android.view.LayoutInflater
+import androidx.appcompat.app.AlertDialog
+import androidx.core.graphics.drawable.toDrawable
 import androidx.core.widget.doOnTextChanged
 import com.github.abusaeed_shuvo.techtrader.data.enums.FieldType
+import com.github.abusaeed_shuvo.techtrader.databinding.LoadingDialogBinding
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputLayout
 
 fun setupFieldValidation(textInputLayout: TextInputLayout, fieldType: FieldType) {
@@ -27,11 +32,17 @@ fun setLoading(isLoading: Boolean, button: MaterialButton, btnText: String) {
 }
 
 class LoadingDialog(context: Context) {
-	private val dialog: ProgressDialog = ProgressDialog(context)
+	private var dialog: AlertDialog
+
 
 	init {
-		dialog.setTitle("Loading...")
-		dialog.setMessage("Please wait.")
+		val binding = LoadingDialogBinding.inflate(LayoutInflater.from(context))
+		binding.loadingTitle.text = "loading..."
+		dialog = MaterialAlertDialogBuilder(context)
+			.setView(binding.root)
+			.create()
+
+		dialog.window?.setBackgroundDrawable(Color.TRANSPARENT.toDrawable())
 	}
 
 	fun show() = dialog.show()

@@ -3,24 +3,28 @@
 	xmlns:tools = "http://schemas.android.com/tools"
 	android:layout_width = "match_parent"
 	android:layout_height = "match_parent"
+	xmlns:app = "http://schemas.android.com/apk/res-auto"
 	tools:context = ".ui.home.HomeFragment">
 
-	<LinearLayout
+
+	<TextView
 		android:layout_width = "match_parent"
-		android:layout_height = "match_parent"
-		android:orientation = "vertical"
-		android:gravity = "center">
+		android:layout_height = "wrap_content"
+		android:id = "@+id/tv_email"
+		android:layout_gravity = "center"
+		android:text = "email"
+		android:textAlignment = "center"
+		android:textAppearance = "@style/TextAppearance.Material3.TitleLarge" />
 
-
-		<TextView
-			android:layout_width = "match_parent"
-			android:layout_height = "wrap_content"
-			android:id = "@+id/tv_email"
-			android:layout_gravity = "center"
-			android:text = "email"
-			android:textAlignment = "center"
-			android:textAppearance = "@style/TextAppearance.Material3.TitleLarge" />
-	</LinearLayout>
-
+	<com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+		android:layout_width = "wrap_content"
+		android:layout_height = "wrap_content"
+		android:text = "Logout"
+		android:layout_gravity = "bottom|end"
+		android:layout_margin = "@dimen/_16sdp"
+		app:icon = "@drawable/ic_logout"
+		app:iconGravity = "end"
+		android:id = "@+id/btn_logout"
+		app:iconPadding = "@dimen/_8sdp" />
 
 </FrameLayout>
