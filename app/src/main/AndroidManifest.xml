@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android = "http://schemas.android.com/apk/res/android">
+
 	<uses-permission android:name = "android.permission.INTERNET" />
+	<uses-permission android:name = "android.permission.POST_NOTIFICATIONS" />
 
 	<application
 		android:name = ".MyApp"
@@ -13,9 +15,23 @@
 		android:supportsRtl = "true"
 		android:theme = "@style/Theme.TechTrader">
 		<activity
-			android:name = ".MainActivity"
-			android:windowSoftInputMode = "adjustResize"
+			android:name = ".ui.notifications.NotificationActivity"
+			android:exported = "false" />
+
+		<service
+			android:name = ".data.service.FirebaseNotificationService"
+			android:enabled = "true"
 			android:exported = "true">
+			<intent-filter>
+				<action android:name = "com.google.firebase.INSTANCE_ID_EVENT" />
+				<action android:name = "com.google.firebase.MESSAGING_EVENT" />
+			</intent-filter>
+		</service>
+
+		<activity
+			android:name = ".MainActivity"
+			android:exported = "true"
+			android:windowSoftInputMode = "adjustResize">
 			<intent-filter>
 				<action android:name = "android.intent.action.MAIN" />
 
