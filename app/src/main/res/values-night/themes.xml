@@ -4,4 +4,9 @@
 		<!-- Customize your dark theme here. -->
 		<!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
 	</style>
+
+	<style name = "Seller.Theme.TechTrader" parent = "Theme.Material3Expressive.DynamicColors.DayNight">
+
+
+	</style>
 </resources>

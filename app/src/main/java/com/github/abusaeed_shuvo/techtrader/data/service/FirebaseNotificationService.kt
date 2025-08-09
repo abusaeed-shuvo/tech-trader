@@ -1,15 +1,8 @@
 package com.github.abusaeed_shuvo.techtrader.data.service
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.content.Intent
-import android.os.Build
 import android.util.Log
-import androidx.core.app.NotificationCompat
-import com.github.abusaeed_shuvo.techtrader.R
 import com.github.abusaeed_shuvo.techtrader.data.repository.NotificationRepository
-import com.github.abusaeed_shuvo.techtrader.ui.notifications.NotificationActivity
+import com.github.abusaeed_shuvo.techtrader.libs.showNotification
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,53 +34,13 @@ class FirebaseNotificationService : FirebaseMessagingService() {
 
 		Log.d(TAG, "onMessageReceived: $title")
 		Log.d(TAG, "onMessageReceived: $body")
-		showNotification(id, title, body)
+
+		showNotification(this, title, body)
+
 		CoroutineScope(Dispatchers.IO).launch {
 			repository.saveNotification(title, body)
 		}
 
 	}
 
-	fun showNotification(id: Int, title: String?, body: String?) {
-		var channel: NotificationChannel? = null
-		var builder: NotificationCompat.Builder? = null
-
-		var channelId = "com.github.abusaeed_shuvo.notificationapp"
-
-		var manager: NotificationManager =
-			getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-
-		var intent = Intent(this, NotificationActivity::class.java)
-
-		var pendingIntent = PendingIntent.getActivity(
-			this,
-			0,
-			intent,
-			PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE
-		)
-
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-			channel =
-				NotificationChannel(channelId, channelId, NotificationManager.IMPORTANCE_HIGH)
-			manager.createNotificationChannel(channel)
-
-			builder = NotificationCompat.Builder(this, channelId)
-				.setContentTitle(title)
-				.setContentText(body)
-				.setAutoCancel(true)
-				.setSmallIcon(R.drawable.ic_notification)
-				.setContentIntent(pendingIntent)
-
-		} else {
-			builder = NotificationCompat.Builder(this, channelId)
-				.setContentTitle(title)
-				.setContentText(body)
-				.setAutoCancel(true)
-				.setSmallIcon(R.drawable.ic_notification)
-				.setContentIntent(pendingIntent)
-		}
-
-
-		manager.notify(id, builder.build())
-	}
 }

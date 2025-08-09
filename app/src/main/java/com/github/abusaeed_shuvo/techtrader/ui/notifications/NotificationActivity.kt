@@ -1,23 +1,17 @@
 package com.github.abusaeed_shuvo.techtrader.ui.notifications
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.github.abusaeed_shuvo.techtrader.R
 import com.github.abusaeed_shuvo.techtrader.data.database.NotificationEntity
 import com.github.abusaeed_shuvo.techtrader.databinding.ActivityNotificationBinding
 import com.github.abusaeed_shuvo.techtrader.databinding.DialogNotificationBinding
+import com.github.abusaeed_shuvo.techtrader.libs.showNotification
 import com.github.abusaeed_shuvo.techtrader.ui.notifications.components.NotificationListAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
@@ -83,7 +77,7 @@ class NotificationActivity : AppCompatActivity() {
 				Snackbar.make(binding.root, "title:$title\nbody:$body", Snackbar.LENGTH_SHORT)
 					.show()
 				viewModel.add(title, body)
-				showNotification(System.currentTimeMillis().toInt(), title, body)
+				showNotification(this@NotificationActivity, title, body)
 				dialog.dismiss()
 			}
 
@@ -103,37 +97,5 @@ class NotificationActivity : AppCompatActivity() {
 		}.setNegativeButton("Cancel", null).show()
 	}
 
-	fun showNotification(id: Int, title: String?, body: String?) {
-		var channel: NotificationChannel? = null
-		var builder: NotificationCompat.Builder? = null
-
-		var channelId = "com.github.abusaeed_shuvo.notificationapp"
-
-		var manager: NotificationManager =
-			getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-
-		var intent = Intent(this, NotificationActivity::class.java)
-
-		var pendingIntent = PendingIntent.getActivity(
-			this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE
-		)
-
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-			channel = NotificationChannel(channelId, channelId, NotificationManager.IMPORTANCE_HIGH)
-			manager.createNotificationChannel(channel)
-
-			builder = NotificationCompat.Builder(this, channelId).setContentTitle(title)
-				.setContentText(body).setAutoCancel(true).setSmallIcon(R.drawable.ic_notification)
-				.setContentIntent(pendingIntent)
-
-		} else {
-			builder = NotificationCompat.Builder(this, channelId).setContentTitle(title)
-				.setContentText(body).setAutoCancel(true).setSmallIcon(R.drawable.ic_notification)
-				.setContentIntent(pendingIntent)
-		}
-
-
-		manager.notify(id, builder.build())
-	}
 
 }

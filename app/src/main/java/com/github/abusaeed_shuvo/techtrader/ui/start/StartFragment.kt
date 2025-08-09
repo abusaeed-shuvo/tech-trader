@@ -1,10 +1,12 @@
 package com.github.abusaeed_shuvo.techtrader.ui.start
 
+import android.content.Intent
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
 import com.github.abusaeed_shuvo.techtrader.R
 import com.github.abusaeed_shuvo.techtrader.base.BaseFragment
 import com.github.abusaeed_shuvo.techtrader.databinding.FragmentStartBinding
+import com.github.abusaeed_shuvo.techtrader.ui.dashboard.seller.SellerDashboard
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -41,7 +43,8 @@ class StartFragment : BaseFragment<FragmentStartBinding>(FragmentStartBinding::i
 
 	private fun setAutoLogin() {
 		auth.currentUser?.let {
-			findNavController().navigate(R.id.action_startFragment_to_homeFragment)
+			startActivity(Intent(requireContext(), SellerDashboard::class.java))
+			requireActivity().finish()
 		}
 	}
 

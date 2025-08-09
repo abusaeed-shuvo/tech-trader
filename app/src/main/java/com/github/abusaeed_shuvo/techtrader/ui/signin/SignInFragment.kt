@@ -1,5 +1,6 @@
 package com.github.abusaeed_shuvo.techtrader.ui.signin
 
+import android.content.Intent
 import android.util.Patterns
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -10,6 +11,7 @@ import com.github.abusaeed_shuvo.techtrader.data.models.UserLogin
 import com.github.abusaeed_shuvo.techtrader.data.state.DataState
 import com.github.abusaeed_shuvo.techtrader.databinding.FragmentSignInBinding
 import com.github.abusaeed_shuvo.techtrader.libs.setupFieldValidation
+import com.github.abusaeed_shuvo.techtrader.ui.dashboard.seller.SellerDashboard
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -63,12 +65,8 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding
 
 				is DataState.Success -> {
 					loading.dismiss()
-					findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
-					Snackbar.make(
-						binding.root,
-						"${dataState.data?.email} login",
-						Snackbar.LENGTH_SHORT
-					).show()
+					startActivity(Intent(requireContext(), SellerDashboard::class.java))
+					requireActivity().finish()
 				}
 			}
 		}

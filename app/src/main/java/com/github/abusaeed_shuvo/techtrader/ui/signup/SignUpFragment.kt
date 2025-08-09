@@ -1,5 +1,6 @@
 package com.github.abusaeed_shuvo.techtrader.ui.signup
 
+import android.content.Intent
 import android.util.Patterns
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -10,6 +11,7 @@ import com.github.abusaeed_shuvo.techtrader.data.models.UserSignup
 import com.github.abusaeed_shuvo.techtrader.data.state.DataState
 import com.github.abusaeed_shuvo.techtrader.databinding.FragmentSignUpBinding
 import com.github.abusaeed_shuvo.techtrader.libs.setupFieldValidation
+import com.github.abusaeed_shuvo.techtrader.ui.dashboard.seller.SellerDashboard
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -74,7 +76,8 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
 				is DataState.Success -> {
 					loading.dismiss()
 
-					findNavController().navigate(R.id.action_signUpFragment_to_homeFragment)
+					startActivity(Intent(requireContext(), SellerDashboard::class.java))
+					requireActivity().finish()
 				}
 			}
 

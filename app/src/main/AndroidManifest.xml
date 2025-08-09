@@ -15,6 +15,11 @@
 		android:supportsRtl = "true"
 		android:theme = "@style/Theme.TechTrader">
 		<activity
+			android:name = ".ui.dashboard.seller.SellerDashboard"
+			android:windowSoftInputMode = "adjustResize"
+			android:theme = "@style/Seller.Theme.TechTrader"
+			android:exported = "false" />
+		<activity
 			android:name = ".ui.notifications.NotificationActivity"
 			android:exported = "false" />
 

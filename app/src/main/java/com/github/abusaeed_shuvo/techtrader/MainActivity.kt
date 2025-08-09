@@ -25,10 +25,12 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 	private lateinit var binding: ActivityMainBinding
+
+
 	private val requestNotificationPermissionLauncher =
 		registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
 			if (isGranted) {
-
+				Toast.makeText(this, "Notification Permission granted!", Toast.LENGTH_SHORT).show()
 			} else {
 				Toast.makeText(this, "Notification permission denied!", Toast.LENGTH_SHORT).show()
 			}
