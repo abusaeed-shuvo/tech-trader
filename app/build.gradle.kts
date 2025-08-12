@@ -48,6 +48,7 @@ kotlin {
 	}
 }
 
+
 dependencies {
 
 	implementation(libs.androidx.core.ktx)
@@ -95,5 +96,8 @@ dependencies {
 	//hilt
 	implementation(libs.androidx.hilt.dagger)
 	ksp(libs.androidx.hilt.compiler)
+
+	//Dhaval2404
+	implementation(libs.imagePicker)
 
 }

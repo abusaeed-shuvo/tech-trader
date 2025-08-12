@@ -2,7 +2,6 @@ package com.github.abusaeed_shuvo.techtrader
 
 import android.Manifest
 import android.app.Activity
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Rect
 import android.os.Build
@@ -19,7 +18,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.github.abusaeed_shuvo.techtrader.databinding.ActivityMainBinding
-import com.github.abusaeed_shuvo.techtrader.ui.notifications.NotificationActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -51,10 +49,6 @@ class MainActivity : AppCompatActivity() {
 		}
 		requestNotificationPermission()
 
-		binding.notification.setOnClickListener {
-			val route = Intent(this, NotificationActivity::class.java)
-			startActivity(route)
-		}
 	}
 
 	fun Activity.hideKeyboard(view: View) {

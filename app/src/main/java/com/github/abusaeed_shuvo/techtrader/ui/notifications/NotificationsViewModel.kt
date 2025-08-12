@@ -3,7 +3,7 @@ package com.github.abusaeed_shuvo.techtrader.ui.notifications
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.github.abusaeed_shuvo.techtrader.data.database.NotificationEntity
+import com.github.abusaeed_shuvo.techtrader.data.models.NotificationEntity
 import com.github.abusaeed_shuvo.techtrader.data.repository.NotificationRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

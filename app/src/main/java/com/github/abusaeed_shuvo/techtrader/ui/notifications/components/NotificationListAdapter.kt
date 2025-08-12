@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.github.abusaeed_shuvo.techtrader.data.database.NotificationEntity
+import com.github.abusaeed_shuvo.techtrader.data.models.NotificationEntity
 import com.github.abusaeed_shuvo.techtrader.databinding.ItemNotificationBinding
 import com.github.abusaeed_shuvo.techtrader.libs.getFormattedTime
 

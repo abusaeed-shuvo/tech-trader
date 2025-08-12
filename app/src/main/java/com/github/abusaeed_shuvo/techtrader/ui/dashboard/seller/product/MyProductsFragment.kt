@@ -1,34 +1,32 @@
 package com.github.abusaeed_shuvo.techtrader.ui.dashboard.seller.product
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.github.abusaeed_shuvo.techtrader.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.abusaeed_shuvo.techtrader.base.BaseFragment
+import com.github.abusaeed_shuvo.techtrader.databinding.FragmentMyProductsBinding
+import com.github.abusaeed_shuvo.techtrader.ui.dashboard.seller.product.components.ProductListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class MyProductsFragment : Fragment() {
-
-	companion object {
-		fun newInstance() = MyProductsFragment()
-	}
+class MyProductsFragment :
+	BaseFragment<FragmentMyProductsBinding>(FragmentMyProductsBinding::inflate) {
+	private lateinit var adapter: ProductListAdapter
 
 	private val viewModel: ProductsViewModel by viewModels()
 
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
 
-		// TODO: Use the ViewModel
+	override fun setListener() {
+		adapter = ProductListAdapter()
+		binding.rcvProducts.adapter = adapter
+		binding.rcvProducts.layoutManager = LinearLayoutManager(requireContext())
+
 	}
 
-	override fun onCreateView(
-		inflater: LayoutInflater, container: ViewGroup?,
-		savedInstanceState: Bundle?
-	): View {
-		return inflater.inflate(R.layout.fragment_my_products, container, false)
+	override fun setObserver() {
+		viewModel.products.observe(viewLifecycleOwner) { products ->
+			adapter.submitList(products)
+
+		}
 	}
 }

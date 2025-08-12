@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.github.abusaeed_shuvo.techtrader.data.database.NotificationEntity
+import com.github.abusaeed_shuvo.techtrader.data.models.NotificationEntity
 import com.github.abusaeed_shuvo.techtrader.databinding.ActivityNotificationBinding
 import com.github.abusaeed_shuvo.techtrader.databinding.DialogNotificationBinding
 import com.github.abusaeed_shuvo.techtrader.libs.showNotification
@@ -36,6 +36,7 @@ class NotificationActivity : AppCompatActivity() {
 			v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
 			insets
 		}
+		supportActionBar?.title = "Notifications"
 
 		adapter = NotificationListAdapter(onItemClick = {
 

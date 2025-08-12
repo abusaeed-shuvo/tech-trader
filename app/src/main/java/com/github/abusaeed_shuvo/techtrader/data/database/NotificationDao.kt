@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.github.abusaeed_shuvo.techtrader.data.models.NotificationEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

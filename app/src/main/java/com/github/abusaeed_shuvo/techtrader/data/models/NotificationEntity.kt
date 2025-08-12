@@ -1,4 +1,4 @@
-package com.github.abusaeed_shuvo.techtrader.data.database
+package com.github.abusaeed_shuvo.techtrader.data.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

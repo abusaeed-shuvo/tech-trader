@@ -1,7 +1,7 @@
 package com.github.abusaeed_shuvo.techtrader.data.repository
 
 import com.github.abusaeed_shuvo.techtrader.data.database.NotificationDao
-import com.github.abusaeed_shuvo.techtrader.data.database.NotificationEntity
+import com.github.abusaeed_shuvo.techtrader.data.models.NotificationEntity
 import javax.inject.Inject
 
 class NotificationRepository @Inject constructor(
