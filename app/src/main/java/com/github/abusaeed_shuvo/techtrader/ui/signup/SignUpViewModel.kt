@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.abusaeed_shuvo.techtrader.data.models.UserSignup
+import com.github.abusaeed_shuvo.techtrader.data.models.toUserEntity
 import com.github.abusaeed_shuvo.techtrader.data.repository.AuthRepository
 import com.github.abusaeed_shuvo.techtrader.data.state.DataState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -31,7 +32,7 @@ class SignUpViewModel @Inject constructor(
 					userSignup.id = it.uid
 				}
 
-				authService.createUser(userSignup).addOnSuccessListener {
+				authService.createUser(userSignup.toUserEntity()).addOnSuccessListener {
 					_registrationResponse.postValue(DataState.Success(userSignup))
 					Log.d(TAG, "Register: Success - ${authResult.user?.email}")
 				}.addOnFailureListener { exception ->

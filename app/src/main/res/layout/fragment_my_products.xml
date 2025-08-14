@@ -1,18 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+	xmlns:app = "http://schemas.android.com/apk/res-auto"
 	xmlns:tools = "http://schemas.android.com/tools"
 	android:layout_width = "match_parent"
 	android:layout_height = "match_parent"
+	android:background = "?attr/colorSurface"
 
 	tools:context = ".ui.dashboard.seller.product.MyProductsFragment">
+
+	<com.google.android.material.progressindicator.LinearProgressIndicator
+		android:id = "@+id/progress_indicator"
+		android:layout_width = "match_parent"
+		android:layout_height = "wrap_content"
+		android:indeterminate = "true"
+		app:indeterminateAnimationType = "contiguous"
+		app:indicatorColor = "@array/progress_colors"
+		app:layout_constraintEnd_toEndOf = "parent"
+		app:layout_constraintStart_toStartOf = "parent"
+		app:layout_constraintTop_toTopOf = "parent"
+		app:trackColor = "?attr/colorOnSurface"
+
+
+		/>
+
 
 	<androidx.recyclerview.widget.RecyclerView
 		android:id = "@+id/rcv_products"
 		android:layout_width = "match_parent"
-		android:layout_height = "match_parent"
-		android:padding = "@dimen/_16sdp"
-
+		android:layout_height = "0dp"
+		android:padding = "@dimen/_8sdp"
+		app:layoutManager = "androidx.recyclerview.widget.GridLayoutManager"
+		app:layout_constraintBottom_toBottomOf = "parent"
+		app:layout_constraintTop_toBottomOf = "@id/progress_indicator"
+		app:spanCount = "2"
 
 		tools:listitem = "@layout/item_product" />
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

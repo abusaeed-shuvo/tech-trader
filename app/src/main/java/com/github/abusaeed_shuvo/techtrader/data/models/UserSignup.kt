@@ -7,3 +7,14 @@ data class UserSignup(
 	val password: String,
 	val userType: String
 )
+
+fun UserSignup.toUserEntity(): UserEntity {
+	return UserEntity(
+		id = id,
+		name = name,
+		email = email,
+		password = password,
+		userType = userType,
+		profileImageLink = "",
+	)
+}

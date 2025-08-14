@@ -2,4 +2,9 @@
 <resources>
 	<color name = "black">#FF000000</color>
 	<color name = "white">#FFFFFFFF</color>
+	<array name = "progress_colors">
+		<item>#6200EA</item>
+		<item>#DD2C00</item>
+		<item>#00C853</item>
+	</array>
 </resources>

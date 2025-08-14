@@ -1,6 +1,7 @@
 package com.github.abusaeed_shuvo.techtrader.data.repository
 
 import com.github.abusaeed_shuvo.techtrader.base.Nodes
+import com.github.abusaeed_shuvo.techtrader.data.models.UserEntity
 import com.github.abusaeed_shuvo.techtrader.data.models.UserLogin
 import com.github.abusaeed_shuvo.techtrader.data.models.UserSignup
 import com.github.abusaeed_shuvo.techtrader.data.service.AuthService
@@ -23,8 +24,8 @@ class AuthRepository @Inject constructor(
 	override fun userLogin(userLogin: UserLogin): Task<AuthResult> =
 		auth.signInWithEmailAndPassword(userLogin.email, userLogin.password)
 
-	override fun createUser(userSignup: UserSignup): Task<Void> {
-		return db.collection(Nodes.USER).document(userSignup.id).set(userSignup)
+	override fun createUser(userEntity: UserEntity): Task<Void> {
+		return db.collection(Nodes.USER).document(userEntity.id).set(userEntity)
 	}
 
 

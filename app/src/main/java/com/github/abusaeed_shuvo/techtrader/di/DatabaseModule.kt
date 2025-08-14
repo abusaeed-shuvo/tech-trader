@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.room.Room
 import com.github.abusaeed_shuvo.techtrader.data.database.AppDatabase
 import com.github.abusaeed_shuvo.techtrader.data.database.NotificationDao
-import com.github.abusaeed_shuvo.techtrader.data.database.ProductDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,8 +30,5 @@ object DatabaseModule {
 		return database.notificationDao()
 	}
 
-	@Provides
-	fun providesProductDao(database: AppDatabase): ProductDao {
-		return database.productDao()
-	}
+
 }

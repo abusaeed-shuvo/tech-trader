@@ -2,24 +2,26 @@ package com.github.abusaeed_shuvo.techtrader.ui.dashboard.seller.product.compone
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.github.abusaeed_shuvo.techtrader.R
-import com.github.abusaeed_shuvo.techtrader.data.models.ProductEntity
+import com.github.abusaeed_shuvo.techtrader.data.models.Product
 import com.github.abusaeed_shuvo.techtrader.databinding.ItemProductBinding
 
 
 class ProductListAdapter :
-	ListAdapter<ProductEntity, ProductListAdapter.ProductVH>(ADiffCallBack()) {
+	ListAdapter<
+			Product, ProductListAdapter.ProductVH>(ADiffCallBack()) {
 	override fun onCreateViewHolder(
 		parent: ViewGroup, viewType: Int
 	): ProductVH {
 		return ProductVH(
 			ItemProductBinding.inflate(
-					LayoutInflater.from(parent.context), parent, false
-				)
+				LayoutInflater.from(parent.context), parent, false
+			)
 		)
 	}
 
@@ -32,30 +34,29 @@ class ProductListAdapter :
 
 	inner class ProductVH(private val binding: ItemProductBinding) :
 		RecyclerView.ViewHolder(binding.root) {
-		fun bind(productEntity: ProductEntity) = with(binding) {
-			productName.text = productEntity.name
-			productDesc.text = productEntity.description
-			productPrice.text = "Price: ${productEntity.price}$"
-			productQuantity.text = "Quantity: ${productEntity.quantity.toString()}"
-			Glide.with(binding.root.context).load(productEntity.imageLink)
-				.placeholder(R.drawable.ic_image_upload).error(R.drawable.ic_error)
-				.into(binding.productImage)
+		fun bind(product: Product) = with(binding) {
+			productName.text = product.name
+			productDesc.text = product.description
+			productPrice.text = "Price: ${product.price}$"
+			productQuantity.text = "Quantity: ${product.quantity}"
+			Glide.with(binding.root.context).load(product.imageLink.toUri())
+				.placeholder(R.drawable.ic_image_upload)
+				.error(R.drawable.ic_image_upload).into(productImage)
 
 		}
 	}
 
-	class ADiffCallBack : DiffUtil.ItemCallback<ProductEntity>() {
+	class ADiffCallBack : DiffUtil.ItemCallback<Product>() {
 		override fun areItemsTheSame(
-			oldItem: ProductEntity, newItem: ProductEntity
-		): Boolean {
-			return oldItem.productId == newItem.productId
-		}
+			oldItem: Product,
+			newItem: Product
+		): Boolean = oldItem.productId == newItem.productId
 
 		override fun areContentsTheSame(
-			oldItem: ProductEntity, newItem: ProductEntity
-		): Boolean {
-			return oldItem == newItem
-		}
+			oldItem: Product,
+			newItem: Product
+		): Boolean = oldItem == newItem
+
 
 	}
 }

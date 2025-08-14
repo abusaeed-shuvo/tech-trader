@@ -1,13 +1,33 @@
 {
   "project_info": {
-    "project_number": "143825595065",
-    "project_id": "trader-f113c",
-    "storage_bucket": "trader-f113c.firebasestorage.app"
+    "project_number": "524655906836",
+    "firebase_url": "https://budget-manager-3ac4e-default-rtdb.firebaseio.com",
+    "project_id": "budget-manager-3ac4e",
+    "storage_bucket": "budget-manager-3ac4e.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:143825595065:android:20d430517fb86dee6d4968",
+        "mobilesdk_app_id": "1:524655906836:android:492cfc7d448e08b2255701",
+        "android_client_info": {
+          "package_name": "com.example.budget_manager"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9JLmXt8Q96u-szC8joeMvrXMoXmEOViI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:524655906836:android:ff1106f1e0c25ebe255701",
         "android_client_info": {
           "package_name": "com.github.abusaeed_shuvo.techtrader"
         }
@@ -15,7 +35,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCO8nD9naL5QJcILi_9NA1Hkv425Tbd29w"
+          "current_key": "AIzaSyD9JLmXt8Q96u-szC8joeMvrXMoXmEOViI"
         }
       ],
       "services": {

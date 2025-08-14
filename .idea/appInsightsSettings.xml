@@ -9,9 +9,9 @@
               <option name="connection">
                 <ConnectionSetting>
                   <option name="appId" value="com.github.abusaeed_shuvo.techtrader" />
-                  <option name="mobileSdkAppId" value="1:143825595065:android:20d430517fb86dee6d4968" />
-                  <option name="projectId" value="trader-f113c" />
-                  <option name="projectNumber" value="143825595065" />
+                  <option name="mobileSdkAppId" value="1:524655906836:android:ff1106f1e0c25ebe255701" />
+                  <option name="projectId" value="budget-manager-3ac4e" />
+                  <option name="projectNumber" value="524655906836" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

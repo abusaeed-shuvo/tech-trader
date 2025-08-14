@@ -72,6 +72,8 @@ dependencies {
 	implementation(libs.firebase.inappmessaging.display)
 	implementation(libs.androidx.legacy.support.v4)
 	implementation(libs.androidx.fragment.ktx)
+	implementation(libs.firebase.database)
+	implementation(libs.firebase.storage)
 
 	testImplementation(libs.junit)
 	androidTestImplementation(libs.androidx.junit)
@@ -88,6 +90,10 @@ dependencies {
 
 	//glide
 	implementation(libs.glide)
+
+	//coil
+	implementation("io.coil-kt.coil3:coil:3.3.0") // Replace 3.x.x with the latest version
+	implementation("io.coil-kt.coil3:coil-network-okhttp:3.3.0") // For network image loading
 
 	//ssp sdp
 	implementation("com.intuit.ssp:ssp-android:1.1.1")
