@@ -28,5 +28,13 @@ class AuthRepository @Inject constructor(
 		return db.collection(Nodes.USER).document(userEntity.id).set(userEntity)
 	}
 
+	fun updateUserProfile(userEntity: UserEntity): Task<Void> {
+		return db.collection(Nodes.USER).document(userEntity.id).update(
+			mapOf(
+				"name" to userEntity.name,
+				"profileImageLink" to userEntity.profileImageLink
+			)
+		)
+	}
 
 }

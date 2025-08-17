@@ -5,6 +5,7 @@ import com.github.abusaeed_shuvo.techtrader.base.Nodes
 import com.github.abusaeed_shuvo.techtrader.data.models.Product
 import com.github.abusaeed_shuvo.techtrader.data.service.SellerService
 import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.storage.StorageReference
@@ -27,5 +28,15 @@ class SellerRepository @Inject constructor(
 
 	override fun getAllProductByUserId(userId: String): Task<QuerySnapshot> {
 		return db.collection(Nodes.PRODUCT).whereEqualTo(Nodes.SELLER_ID, userId).get()
+	}
+
+	fun uploadUserImage(productImageUri: Uri, userId: String): UploadTask {
+		val storage: StorageReference =
+			storageRef.child(Nodes.USER).child(userId)
+		return storage.putFile(productImageUri)
+	}
+
+	fun getUserDataById(userId: String): Task<DocumentSnapshot?> {
+		return db.collection(Nodes.USER).document(userId).get()
 	}
 }

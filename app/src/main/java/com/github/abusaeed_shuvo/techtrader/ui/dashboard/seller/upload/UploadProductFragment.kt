@@ -45,12 +45,21 @@ class UploadProductFragment :
 			}
 
 			btnAddProduct.setOnClickListener {
-				val name = inputProductName.editText?.text.toString()
-				val desc = inputProductDescription.editText?.text.toString()
+				val name = inputProductName.editText?.text.toString().trim()
+				val desc = inputProductDescription.editText?.text.toString().trim()
 				val price = inputProductPrice.editText?.text.toString().toDouble()
 				val quantity = inputProductQuantity.editText?.text.toString().toInt()
 				val sellerId = auth.currentUser?.uid ?: ""
 
+				if (name.isEmpty() || desc.isEmpty() || price.isNaN() || quantity < 0) {
+					Snackbar.make(
+						binding.root,
+						"Blank Entry not allowed!",
+						Snackbar.LENGTH_SHORT
+					)
+						.show()
+					return@setOnClickListener
+				}
 
 				val product = Product(
 					name,
@@ -103,7 +112,7 @@ class UploadProductFragment :
 	private fun getPermissionRequest(): ActivityResultLauncher<Array<String>> {
 		return registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
 			if (areAllPermissionsGranted(permissionList)) {
-				ImagePicker.with(this).compress(1024).maxResultSize(720, 1080)
+				ImagePicker.with(this).compress(1024).maxResultSize(512, 512)
 					.createIntent { intent ->
 						startForProductImageResult.launch(intent)
 					}

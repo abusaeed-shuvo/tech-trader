@@ -1,7 +1,9 @@
 package com.github.abusaeed_shuvo.techtrader.ui.dashboard.seller.product
 
+import android.graphics.Color
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.abusaeed_shuvo.techtrader.base.BaseFragment
 import com.github.abusaeed_shuvo.techtrader.data.state.DataState
 import com.github.abusaeed_shuvo.techtrader.databinding.FragmentMyProductsBinding
@@ -16,6 +18,7 @@ import javax.inject.Inject
 class MyProductsFragment :
 	BaseFragment<FragmentMyProductsBinding>(FragmentMyProductsBinding::inflate) {
 	private lateinit var adapter: ProductListAdapter
+	private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
 	@Inject
 	lateinit var auth: FirebaseAuth
@@ -24,12 +27,25 @@ class MyProductsFragment :
 
 
 	override fun setListener() {
+
+		swipeRefreshLayout = binding.swipeToRefreshLayout
 		adapter = ProductListAdapter()
 		binding.rcvProducts.adapter = adapter
+
 
 		auth.currentUser?.let { user ->
 			viewModel.getProductById(user.uid)
 		}
+
+		swipeRefreshLayout.setOnRefreshListener {
+			auth.currentUser?.let { user ->
+				viewModel.getProductById(user.uid)
+			}
+		}
+		swipeRefreshLayout.setColorSchemeColors(
+			Color.RED, Color.GREEN, Color.BLUE
+		)
+		swipeRefreshLayout.setProgressBackgroundColorSchemeColor(Color.LTGRAY)
 	}
 
 	override fun setObserver() {
