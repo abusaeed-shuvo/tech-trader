@@ -8,27 +8,13 @@
 
 	tools:context = ".ui.dashboard.seller.product.MyProductsFragment">
 
-	<com.google.android.material.progressindicator.LinearProgressIndicator
-		android:id = "@+id/progress_indicator"
-		android:layout_width = "match_parent"
-		android:layout_height = "wrap_content"
-		android:indeterminate = "true"
-		app:indeterminateAnimationType = "contiguous"
-		app:indicatorColor = "@array/progress_colors"
-		app:layout_constraintEnd_toEndOf = "parent"
-		app:layout_constraintStart_toStartOf = "parent"
-		app:layout_constraintTop_toTopOf = "parent"
-		app:trackColor = "?attr/colorOnSurface"
-
-
-		/>
 
 	<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 		android:id = "@+id/swipe_to_refresh_layout"
 		android:layout_width = "match_parent"
 		android:layout_height = "0dp"
 		app:layout_constraintBottom_toBottomOf = "parent"
-		app:layout_constraintTop_toBottomOf = "@id/progress_indicator">
+		app:layout_constraintTop_toTopOf = "parent">
 
 		<androidx.recyclerview.widget.RecyclerView
 			android:id = "@+id/rcv_products"

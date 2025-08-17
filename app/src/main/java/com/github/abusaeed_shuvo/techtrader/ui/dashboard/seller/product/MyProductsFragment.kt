@@ -1,7 +1,6 @@
 package com.github.abusaeed_shuvo.techtrader.ui.dashboard.seller.product
 
 import android.graphics.Color
-import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.abusaeed_shuvo.techtrader.base.BaseFragment
@@ -52,31 +51,24 @@ class MyProductsFragment :
 		viewModel.productResponse.observe(viewLifecycleOwner) {
 			when (it) {
 				is DataState.Error   -> {
-					dismissLoading()
+					swipeRefreshLayout.isRefreshing = false
 					Snackbar.make(binding.root, "Error: ${it.message}", Snackbar.LENGTH_SHORT)
 						.show()
 				}
 
 				is DataState.Loading -> {
-					showLoading()
+					swipeRefreshLayout.isRefreshing = true
 				}
 
 				is DataState.Success -> {
+					swipeRefreshLayout.isRefreshing = false
 					it.data?.let { products ->
 						adapter.submitList(products)
 					}
-					dismissLoading()
 				}
 			}
 		}
 	}
 
-	private fun showLoading() {
-		binding.progressIndicator.visibility = View.VISIBLE
-		binding.progressIndicator.isIndeterminate = true
-	}
 
-	private fun dismissLoading() {
-		binding.progressIndicator.visibility = View.GONE
-	}
 }
