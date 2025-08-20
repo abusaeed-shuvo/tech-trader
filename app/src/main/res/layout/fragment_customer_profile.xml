@@ -4,7 +4,8 @@
 	xmlns:tools = "http://schemas.android.com/tools"
 	android:layout_width = "match_parent"
 	android:layout_height = "match_parent"
-	tools:context = ".ui.dashboard.seller.profile.SellerProfileFragment">
+	android:orientation = "vertical"
+	tools:context = ".ui.dashboard.customer.profile.CustomerProfileFragment">
 
 	<com.google.android.material.progressindicator.LinearProgressIndicator
 		android:id = "@+id/progress_indicator"
@@ -35,7 +36,6 @@
 		app:layout_constraintTop_toTopOf = "parent" />
 
 	<androidx.constraintlayout.widget.ConstraintLayout
-		android:id = "@+id/user_details_container"
 		android:layout_width = "match_parent"
 		android:layout_height = "0dp"
 		app:layout_constraintBottom_toBottomOf = "parent"
@@ -50,8 +50,8 @@
 			android:layout_margin = "@dimen/_6sdp"
 			android:elevation = "@dimen/_200sdp"
 			android:src = "@drawable/ic_edit"
-			app:layout_constraintEnd_toEndOf = "@id/user_details_container"
-			app:layout_constraintTop_toTopOf = "@id/user_details_container"
+			app:layout_constraintEnd_toEndOf = "@id/user_container"
+			app:layout_constraintTop_toTopOf = "@id/user_container"
 			app:tint = "?attr/colorOnPrimary" />
 
 
@@ -128,96 +128,66 @@
 			</LinearLayout>
 		</com.google.android.material.card.MaterialCardView>
 
-		<androidx.core.widget.NestedScrollView
-			android:id = "@+id/detail_container"
+		<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 			android:layout_width = "match_parent"
-			android:layout_height = "wrap_content"
+			android:layout_height = "0dp"
+			app:layout_constraintBottom_toTopOf = "@id/btn_logout"
 			app:layout_constraintTop_toBottomOf = "@id/user_container">
 
 
-			<LinearLayout
+			<androidx.core.widget.NestedScrollView
+				android:id = "@+id/detail_container"
 				android:layout_width = "match_parent"
-				android:layout_height = "wrap_content"
-				android:orientation = "vertical">
+				android:layout_height = "wrap_content">
 
-				<com.google.android.material.card.MaterialCardView
+
+				<LinearLayout
 					android:layout_width = "match_parent"
 					android:layout_height = "wrap_content"
-					android:layout_marginTop = "@dimen/_8sdp"
-					app:cardBackgroundColor = "?attr/colorSecondary"
-					app:cardCornerRadius = "@dimen/_16sdp">
+					android:orientation = "vertical">
 
-					<TextView
-						android:id = "@+id/seller_id"
+					<com.google.android.material.card.MaterialCardView
 						android:layout_width = "match_parent"
 						android:layout_height = "wrap_content"
-						android:padding = "@dimen/_16sdp"
-						android:text = "Id:"
-						android:textAlignment = "viewStart"
-						android:textAppearance = "@style/TextAppearance.Material3.TitleMedium"
-						android:textColor = "?attr/colorOnSecondary" />
-				</com.google.android.material.card.MaterialCardView>
-
-
-				<com.google.android.material.card.MaterialCardView
-					android:layout_width = "match_parent"
-					android:layout_height = "wrap_content"
-					android:layout_marginTop = "@dimen/_8sdp"
-					app:cardBackgroundColor = "?attr/colorSecondary"
-					app:cardCornerRadius = "@dimen/_16sdp">
-
-					<TextView
-						android:id = "@+id/seller_email"
-						android:layout_width = "match_parent"
-						android:layout_height = "wrap_content"
-						android:padding = "@dimen/_16sdp"
-						android:text = "Email:"
-						android:textAlignment = "viewStart"
-						android:textAppearance = "@style/TextAppearance.Material3.TitleMedium"
-						android:textColor = "?attr/colorOnSecondary" />
-				</com.google.android.material.card.MaterialCardView>
-
-				<com.google.android.material.card.MaterialCardView
-					android:layout_width = "match_parent"
-					android:layout_height = "wrap_content"
-					android:layout_marginTop = "@dimen/_8sdp"
-					app:cardBackgroundColor = "?attr/colorSecondary"
-					app:cardCornerRadius = "@dimen/_16sdp">
-
-					<LinearLayout
-						android:layout_width = "match_parent"
-						android:layout_height = "wrap_content"
-						android:gravity = "center"
-						android:orientation = "horizontal">
+						android:layout_marginTop = "@dimen/_8sdp"
+						app:cardBackgroundColor = "?attr/colorSecondary"
+						app:cardCornerRadius = "@dimen/_16sdp">
 
 						<TextView
-							android:id = "@+id/shop_name"
-							android:layout_width = "0dp"
+							android:id = "@+id/seller_id"
+							android:layout_width = "match_parent"
 							android:layout_height = "wrap_content"
-							android:layout_weight = "1"
 							android:padding = "@dimen/_16sdp"
-							android:text = "Shop:"
+							android:text = "Id:"
 							android:textAlignment = "viewStart"
 							android:textAppearance = "@style/TextAppearance.Material3.TitleMedium"
 							android:textColor = "?attr/colorOnSecondary" />
-
-						<com.google.android.material.imageview.ShapeableImageView
-							android:id = "@+id/edit_shop_name"
-							android:layout_width = "@dimen/_30sdp"
-							android:layout_height = "@dimen/_30sdp"
-							android:layout_marginEnd = "@dimen/_8sdp"
-							android:src = "@drawable/ic_edit"
-							app:tint = "?attr/colorOnSecondary" />
+					</com.google.android.material.card.MaterialCardView>
 
 
-					</LinearLayout>
+					<com.google.android.material.card.MaterialCardView
+						android:layout_width = "match_parent"
+						android:layout_height = "wrap_content"
+						android:layout_marginTop = "@dimen/_8sdp"
+						app:cardBackgroundColor = "?attr/colorSecondary"
+						app:cardCornerRadius = "@dimen/_16sdp">
 
-				</com.google.android.material.card.MaterialCardView>
+						<TextView
+							android:id = "@+id/seller_email"
+							android:layout_width = "match_parent"
+							android:layout_height = "wrap_content"
+							android:padding = "@dimen/_16sdp"
+							android:text = "Email:"
+							android:textAlignment = "viewStart"
+							android:textAppearance = "@style/TextAppearance.Material3.TitleMedium"
+							android:textColor = "?attr/colorOnSecondary" />
+					</com.google.android.material.card.MaterialCardView>
 
 
-			</LinearLayout>
+				</LinearLayout>
 
-		</androidx.core.widget.NestedScrollView>
+			</androidx.core.widget.NestedScrollView>
+		</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 		<com.google.android.material.button.MaterialButton
 			android:id = "@+id/btn_submit"
@@ -242,4 +212,5 @@
 			android:text = "Logout"
 			app:layout_constraintBottom_toBottomOf = "parent" />
 	</androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

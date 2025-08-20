@@ -13,10 +13,10 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.github.abusaeed_shuvo.techtrader.MainActivity
 import com.github.abusaeed_shuvo.techtrader.R
 import com.github.abusaeed_shuvo.techtrader.databinding.ActivitySellerDashboardBinding
 import com.github.abusaeed_shuvo.techtrader.ui.notifications.NotificationActivity
+import com.github.abusaeed_shuvo.techtrader.ui.register.MainActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth

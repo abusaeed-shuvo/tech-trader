@@ -1,11 +1,11 @@
-package com.github.abusaeed_shuvo.techtrader.ui.dashboard.seller.product
+package com.github.abusaeed_shuvo.techtrader.ui.dashboard.customer.product
 
 import android.graphics.Color
 import androidx.fragment.app.viewModels
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.abusaeed_shuvo.techtrader.base.BaseFragment
 import com.github.abusaeed_shuvo.techtrader.data.state.DataState
-import com.github.abusaeed_shuvo.techtrader.databinding.FragmentMyProductsBinding
+import com.github.abusaeed_shuvo.techtrader.databinding.FragmentProductListBinding
 import com.github.abusaeed_shuvo.techtrader.ui.dashboard.seller.product.components.ProductListAdapter
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -14,14 +14,15 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class MyProductsFragment :
-	BaseFragment<FragmentMyProductsBinding>(FragmentMyProductsBinding::inflate) {
+class ProductListFragment :
+	BaseFragment<FragmentProductListBinding>(FragmentProductListBinding::inflate) {
+
 	private lateinit var adapter: ProductListAdapter
 	private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
 	@Inject
 	lateinit var auth: FirebaseAuth
-	private val viewModel: ProductsViewModel by viewModels()
+	private val viewModel: ProductListViewModel by viewModels()
 
 	override fun setListener() {
 		swipeRefreshLayout = binding.swipeToRefreshLayout
@@ -65,6 +66,5 @@ class MyProductsFragment :
 			}
 		}
 	}
-
 
 }

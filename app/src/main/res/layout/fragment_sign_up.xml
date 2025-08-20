@@ -4,7 +4,7 @@
 	xmlns:tools = "http://schemas.android.com/tools"
 	android:layout_width = "match_parent"
 	android:layout_height = "match_parent"
-	tools:context = ".ui.signup.SignUpFragment">
+	tools:context = ".ui.register.signup.SignUpFragment">
 
 	<androidx.core.widget.NestedScrollView
 		android:id = "@+id/container"
@@ -46,12 +46,12 @@
 				app:singleSelection = "true">
 
 				<com.google.android.material.button.MaterialButton
-					android:id = "@+id/btn_buyer"
+					android:id = "@+id/btn_customer"
 					style = "?attr/materialButtonOutlinedStyle"
 					android:layout_width = "0dp"
 					android:layout_height = "wrap_content"
 					android:layout_weight = "1"
-					android:text = "Buyer" />
+					android:text = "Customer" />
 
 				<com.google.android.material.button.MaterialButton
 					android:id = "@+id/btn_seller"

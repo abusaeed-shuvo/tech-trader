@@ -1,9 +1,10 @@
-package com.github.abusaeed_shuvo.techtrader.ui.signin
+package com.github.abusaeed_shuvo.techtrader.ui.register.signin
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.github.abusaeed_shuvo.techtrader.base.Nodes
 import com.github.abusaeed_shuvo.techtrader.data.models.UserLogin
 import com.github.abusaeed_shuvo.techtrader.data.repository.AuthRepository
 import com.github.abusaeed_shuvo.techtrader.data.state.DataState
@@ -35,5 +36,24 @@ class SignInViewModel @Inject constructor(
 		}
 	}
 
+	private val _userTypeResponse = MutableLiveData<DataState<String>>()
+	val userTypeResponse get() = _userTypeResponse
+
+	fun getUserTypeById(uid: String) {
+		_userTypeResponse.postValue(DataState.Loading())
+		authService.getUserTypeById(uid)
+			.addOnSuccessListener { documentSnapshot ->
+
+				val userType = documentSnapshot?.getString(Nodes.USER_TYPE)
+				if (userType != null) {
+					_userTypeResponse.postValue(DataState.Success(userType))
+
+				} else {
+					_userTypeResponse.postValue(DataState.Error("Login to get started"))
+				}
+			}.addOnFailureListener {
+				_userTypeResponse.postValue(DataState.Error(it.message))
+			}
+	}
 
 }

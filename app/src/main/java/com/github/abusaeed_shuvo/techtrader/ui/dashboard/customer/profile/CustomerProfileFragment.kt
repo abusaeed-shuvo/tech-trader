@@ -1,4 +1,4 @@
-package com.github.abusaeed_shuvo.techtrader.ui.dashboard.seller.profile
+package com.github.abusaeed_shuvo.techtrader.ui.dashboard.customer.profile
 
 import android.content.Intent
 import android.view.View
@@ -9,7 +9,7 @@ import com.github.abusaeed_shuvo.techtrader.base.BaseFragment
 import com.github.abusaeed_shuvo.techtrader.data.models.UserEntity
 import com.github.abusaeed_shuvo.techtrader.data.state.DataState
 import com.github.abusaeed_shuvo.techtrader.databinding.DialogTextfieldInputBinding
-import com.github.abusaeed_shuvo.techtrader.databinding.FragmentSellerProfileBinding
+import com.github.abusaeed_shuvo.techtrader.databinding.FragmentCustomerProfileBinding
 import com.github.abusaeed_shuvo.techtrader.libs.ImagePickerHelper
 import com.github.abusaeed_shuvo.techtrader.ui.register.MainActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -17,16 +17,16 @@ import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-
 @AndroidEntryPoint
-class SellerProfileFragment :
-	BaseFragment<FragmentSellerProfileBinding>(FragmentSellerProfileBinding::inflate) {
+class CustomerProfileFragment : BaseFragment<FragmentCustomerProfileBinding>(
+	FragmentCustomerProfileBinding::inflate
+) {
 
 	@Inject
 	lateinit var auth: FirebaseAuth
 	private lateinit var imagePickerHelper: ImagePickerHelper
 
-	private val viewModel: SellerProfileViewModel by viewModels()
+	private val viewModel: CustomerProfileViewModel by viewModels()
 
 	override fun setListener() {
 		imagePickerHelper = ImagePickerHelper(this) { uri ->

@@ -8,25 +8,6 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:524655906836:android:492cfc7d448e08b2255701",
-        "android_client_info": {
-          "package_name": "com.example.budget_manager"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyD9JLmXt8Q96u-szC8joeMvrXMoXmEOViI"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:524655906836:android:ff1106f1e0c25ebe255701",
         "android_client_info": {
           "package_name": "com.github.abusaeed_shuvo.techtrader"

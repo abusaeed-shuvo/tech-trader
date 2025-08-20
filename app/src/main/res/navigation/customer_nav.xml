@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android = "http://schemas.android.com/apk/res/android"
+	xmlns:app = "http://schemas.android.com/apk/res-auto"
+	xmlns:tools = "http://schemas.android.com/tools"
+	android:id = "@+id/customer_nav"
+	app:startDestination = "@id/productListFragment">
+
+	<fragment
+		android:id = "@+id/productListFragment"
+		android:name = "com.github.abusaeed_shuvo.techtrader.ui.dashboard.customer.product.ProductListFragment"
+		android:label = "Products"
+		tools:layout = "@layout/fragment_product_list" />
+	<fragment
+		android:id = "@+id/cartFragment"
+		android:name = "com.github.abusaeed_shuvo.techtrader.ui.dashboard.customer.cart.CartFragment"
+		android:label = "Cart"
+		tools:layout = "@layout/fragment_cart" />
+	<fragment
+		android:id = "@+id/customerProfileFragment"
+		android:name = "com.github.abusaeed_shuvo.techtrader.ui.dashboard.customer.profile.CustomerProfileFragment"
+		android:label = "Profile"
+		tools:layout = "@layout/fragment_customer_profile" />
+</navigation>

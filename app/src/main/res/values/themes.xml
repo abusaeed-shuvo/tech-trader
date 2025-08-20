@@ -11,6 +11,10 @@
 
 	</style>
 
+	<style name = "Customer.Theme.TechTrader" parent = "Theme.Material3Expressive.DynamicColors.DayNight">
+
+	</style>
+
 	<style name = "Notification.Theme.TechTrader" parent = "Theme.Material3Expressive.DynamicColors.DayNight">
 
 	</style>

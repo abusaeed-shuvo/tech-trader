@@ -7,7 +7,7 @@
 
 	<fragment
 		android:id = "@+id/startFragment"
-		android:name = "com.github.abusaeed_shuvo.techtrader.ui.start.StartFragment"
+		android:name = "com.github.abusaeed_shuvo.techtrader.ui.register.start.StartFragment"
 		android:label = "Start"
 		tools:layout = "@layout/fragment_start">
 		<action
@@ -19,7 +19,7 @@
 	</fragment>
 	<fragment
 		android:id = "@+id/signInFragment"
-		android:name = "com.github.abusaeed_shuvo.techtrader.ui.signin.SignInFragment"
+		android:name = "com.github.abusaeed_shuvo.techtrader.ui.register.signin.SignInFragment"
 		android:label = "Login"
 		tools:layout = "@layout/fragment_sign_in">
 		<action
@@ -28,7 +28,7 @@
 	</fragment>
 	<fragment
 		android:id = "@+id/signUpFragment"
-		android:name = "com.github.abusaeed_shuvo.techtrader.ui.signup.SignUpFragment"
+		android:name = "com.github.abusaeed_shuvo.techtrader.ui.register.signup.SignUpFragment"
 		android:label = "Signup"
 		tools:layout = "@layout/fragment_sign_up">
 		<action

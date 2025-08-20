@@ -1,12 +1,6 @@
 package com.github.abusaeed_shuvo.techtrader.ui.dashboard.seller.upload
 
-import android.Manifest
-import android.app.Activity
 import android.net.Uri
-import android.os.Build
-import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -16,7 +10,7 @@ import com.github.abusaeed_shuvo.techtrader.base.BaseFragment
 import com.github.abusaeed_shuvo.techtrader.data.models.Product
 import com.github.abusaeed_shuvo.techtrader.data.state.DataState
 import com.github.abusaeed_shuvo.techtrader.databinding.FragmentUploadProductBinding
-import com.github.dhaval2404.imagepicker.ImagePicker
+import com.github.abusaeed_shuvo.techtrader.libs.ImagePickerHelper
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,7 +21,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class UploadProductFragment :
 	BaseFragment<FragmentUploadProductBinding>(FragmentUploadProductBinding::inflate) {
-	private lateinit var permissionRequest: ActivityResultLauncher<Array<String>>
+	private lateinit var imagePickerHelper: ImagePickerHelper
 
 	@Inject
 	lateinit var auth: FirebaseAuth
@@ -37,27 +31,33 @@ class UploadProductFragment :
 
 
 	override fun setListener() {
-		permissionRequest = getPermissionRequest()
+		imagePickerHelper = ImagePickerHelper(this) { uri ->
+			if (uri != null) {
+				cameraImageUri = uri
+				Glide.with(requireContext()).load(uri)
+					.placeholder(R.drawable.ic_image_upload).error(R.drawable.ic_error)
+					.into(binding.ivProduct)
+			}
+		}
 
 		with(binding) {
 			ivProduct.setOnClickListener {
-				requestPermissions(permissionRequest, permissionList)
+				imagePickerHelper.pickImage()
 			}
 
 			btnAddProduct.setOnClickListener {
 				val name = inputProductName.editText?.text.toString().trim()
 				val desc = inputProductDescription.editText?.text.toString().trim()
-				val price = inputProductPrice.editText?.text.toString().toDouble()
-				val quantity = inputProductQuantity.editText?.text.toString().toInt()
+				val price = inputProductPrice.editText?.text.toString().toDoubleOrNull() ?: 0.0
+				val quantity = inputProductQuantity.editText?.text.toString().toIntOrNull() ?: 0
 				val sellerId = auth.currentUser?.uid ?: ""
 
-				if (name.isEmpty() || desc.isEmpty() || price.isNaN() || quantity < 0) {
+				if (name.isEmpty() || desc.isEmpty() || price < 0.0 || quantity < 0 || cameraImageUri.toString()
+						.isEmpty()
+				) {
 					Snackbar.make(
-						binding.root,
-						"Blank Entry not allowed!",
-						Snackbar.LENGTH_SHORT
-					)
-						.show()
+						binding.root, "Blank Entry not allowed!", Snackbar.LENGTH_SHORT
+					).show()
 					return@setOnClickListener
 				}
 
@@ -109,57 +109,5 @@ class UploadProductFragment :
 		viewModel.productUpload(product)
 	}
 
-	private fun getPermissionRequest(): ActivityResultLauncher<Array<String>> {
-		return registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
-			if (areAllPermissionsGranted(permissionList)) {
-				ImagePicker.with(this).compress(1024).maxResultSize(512, 512)
-					.createIntent { intent ->
-						startForProductImageResult.launch(intent)
-					}
-			} else {
-				Snackbar.make(binding.root, "Failed to get Permissions", Snackbar.LENGTH_SHORT)
-					.show()
-			}
-		}
-	}
-
-	companion object {
-		private val permissionList = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-			arrayOf(
-				Manifest.permission.CAMERA, Manifest.permission.READ_MEDIA_IMAGES
-			)
-		} else {
-			arrayOf(
-				Manifest.permission.CAMERA,
-				Manifest.permission.READ_EXTERNAL_STORAGE,
-				Manifest.permission.WRITE_EXTERNAL_STORAGE
-			)
-		}
-	}
-
-	private val startForProductImageResult =
-		registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
-			val resultCode = activityResult.resultCode
-			val data = activityResult.data
-
-			if (resultCode == Activity.RESULT_OK) {
-				val fileUri = data?.data
-				if (fileUri != null) {
-					cameraImageUri = fileUri
-					Glide.with(requireContext()).load(fileUri)
-						.placeholder(R.drawable.ic_image_upload).error(R.drawable.ic_error)
-						.into(binding.ivProduct)
-					Toast.makeText(requireContext(), "$fileUri", Toast.LENGTH_LONG).show()
-				}
-
-
-			} else if (resultCode == ImagePicker.RESULT_ERROR) {
-				Snackbar.make(binding.root, ImagePicker.getError(data), Snackbar.LENGTH_SHORT)
-					.show()
-			} else {
-				Snackbar.make(binding.root, "Task Cancelled!", Snackbar.LENGTH_SHORT).show()
-			}
-
-		}
 
 }
