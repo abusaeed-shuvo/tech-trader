@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+	xmlns:app = "http://schemas.android.com/apk/res-auto"
+	xmlns:tools = "http://schemas.android.com/tools"
+	android:layout_width = "match_parent"
+	android:layout_height = "match_parent"
+	tools:context = ".ui.dashboard.customer.product_display.ProductDisplayFragment">
+
+	<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+		android:id = "@+id/swipe_to_refresh"
+		android:layout_width = "match_parent"
+		android:layout_height = "0dp"
+		android:padding = "@dimen/_6sdp"
+		app:layout_constraintBottom_toTopOf = "@id/bottom_app_bar"
+		app:layout_constraintEnd_toEndOf = "parent"
+		app:layout_constraintStart_toStartOf = "parent"
+		app:layout_constraintTop_toTopOf = "parent">
+
+		<androidx.core.widget.NestedScrollView
+			android:layout_width = "match_parent"
+			android:layout_height = "wrap_content">
+
+			<LinearLayout
+				android:layout_width = "match_parent"
+				android:layout_height = "wrap_content"
+				android:orientation = "vertical">
+
+				<com.google.android.material.imageview.ShapeableImageView
+					android:id = "@+id/product_image"
+					android:layout_width = "match_parent"
+					android:layout_height = "@dimen/_250sdp"
+					android:backgroundTint = "?attr/colorSecondaryContainer"
+					android:scaleType = "fitCenter"
+					android:src = "@drawable/image_placeholder" />
+
+				<LinearLayout
+					android:layout_width = "match_parent"
+					android:layout_height = "wrap_content"
+					android:gravity = "start"
+					android:orientation = "horizontal"
+
+					>
+
+					<TextView
+						android:id = "@+id/product_price_tv"
+						android:layout_width = "wrap_content"
+						android:layout_height = "wrap_content"
+						android:ellipsize = "end"
+						android:maxLines = "1"
+						android:textAlignment = "viewStart"
+						android:textAppearance = "@style/TextAppearance.Material3.TitleMedium.Emphasized"
+						android:textColor = "?attr/colorPrimary"
+						tools:text = "$240" />
+
+					<TextView
+						android:id = "@+id/product_discount_tv"
+						android:layout_width = "wrap_content"
+						android:layout_height = "wrap_content"
+						android:layout_marginStart = "@dimen/_6sdp"
+						android:backgroundTint = "?attr/colorPrimaryContainer"
+						android:ellipsize = "end"
+						android:maxLines = "1"
+						android:textAlignment = "viewStart"
+						android:textAppearance = "@style/TextAppearance.Material3.TitleMedium.Emphasized"
+						android:textColor = "?attr/colorOnPrimaryContainer"
+						tools:text = "-40%" />
+				</LinearLayout>
+
+				<TextView
+					android:id = "@+id/product_name_view"
+					android:layout_width = "match_parent"
+					android:layout_height = "wrap_content"
+					android:textAppearance = "@style/TextAppearance.Material3.TitleLarge.Emphasized"
+					tools:text = "Product Name" />
+
+
+				<LinearLayout
+					android:layout_width = "match_parent"
+					android:layout_height = "wrap_content"
+					android:gravity = "start"
+					android:orientation = "horizontal"
+
+					>
+
+					<TextView
+						android:id = "@+id/product_ratings_tv"
+						android:layout_width = "wrap_content"
+						android:layout_height = "wrap_content"
+						android:ellipsize = "end"
+						android:maxLines = "1"
+						android:textAlignment = "viewStart"
+						android:textAppearance = "@style/TextAppearance.Material3.TitleMedium"
+						android:textColor = "?attr/colorOnSurface"
+						tools:text = "⭐Ratings" />
+
+					<TextView
+						android:id = "@+id/product_sold_tv"
+						android:layout_width = "wrap_content"
+						android:layout_height = "wrap_content"
+						android:layout_marginStart = "@dimen/_6sdp"
+						android:ellipsize = "end"
+						android:maxLines = "1"
+						android:textAlignment = "viewStart"
+						android:textAppearance = "@style/TextAppearance.Material3.TitleMedium"
+						android:textColor = "?attr/colorOnSurface"
+						tools:text = "100 sold" />
+				</LinearLayout>
+
+				<com.google.android.material.card.MaterialCardView
+					android:layout_width = "match_parent"
+					android:layout_height = "wrap_content"
+
+					android:layout_marginTop = "@dimen/_16sdp">
+
+					<LinearLayout
+						android:layout_width = "match_parent"
+						android:layout_height = "wrap_content"
+						android:orientation = "vertical"
+						android:padding = "@dimen/_4sdp">
+
+						<TextView
+							android:layout_width = "match_parent"
+							android:layout_height = "wrap_content"
+							android:text = "Product Details:"
+							android:textAppearance = "@style/TextAppearance.Material3.TitleLarge.Emphasized" />
+
+						<TextView
+							android:id = "@+id/product_details"
+							android:layout_width = "match_parent"
+							android:layout_height = "wrap_content"
+							android:textAppearance = "@style/TextAppearance.Material3.BodyLarge"
+							tools:text = "details" />
+					</LinearLayout>
+				</com.google.android.material.card.MaterialCardView>
+
+				<com.google.android.material.card.MaterialCardView
+					android:layout_width = "match_parent"
+					android:layout_height = "wrap_content">
+
+					<androidx.recyclerview.widget.RecyclerView
+						android:id = "@+id/rcv_rating"
+						android:layout_width = "match_parent"
+						android:layout_height = "wrap_content"
+						app:layoutManager = "androidx.recyclerview.widget.LinearLayoutManager"
+						tools:listitem = "@layout/item_rating_review" />
+
+				</com.google.android.material.card.MaterialCardView>
+
+				<com.google.android.material.card.MaterialCardView
+					android:layout_width = "match_parent"
+					android:layout_height = "wrap_content">
+
+					<LinearLayout
+						android:layout_width = "match_parent"
+						android:layout_height = "wrap_content"
+						android:orientation = "vertical">
+
+						<TextView
+							android:layout_width = "match_parent"
+							android:layout_height = "wrap_content"
+							android:text = "Rate the product:"
+							android:textAppearance = "@style/TextAppearance.Material3.TitleLarge.Emphasized" />
+
+						<RatingBar
+							android:id = "@+id/rating_bar"
+
+							android:layout_width = "wrap_content"
+							android:layout_height = "wrap_content"
+							android:layout_gravity = "center"
+							android:isIndicator = "false"
+							android:numStars = "5"
+							android:rating = "0"
+							android:stepSize = "1"
+							android:theme = "@style/Widget.AppCompat.RatingBar.Small" />
+
+						<TextView
+							android:layout_width = "match_parent"
+							android:layout_height = "wrap_content"
+							android:text = "Your review:"
+							android:textAppearance = "@style/TextAppearance.Material3.TitleLarge.Emphasized" />
+
+						<com.google.android.material.textfield.TextInputLayout
+							android:id = "@+id/product_review_et"
+							android:layout_width = "match_parent"
+							android:layout_height = "wrap_content"
+							android:layout_margin = "@dimen/_6sdp"
+							app:counterEnabled = "true"
+							app:counterMaxLength = "100">
+
+							<com.google.android.material.textfield.TextInputEditText
+								android:layout_width = "match_parent"
+								android:layout_height = "@dimen/_150sdp"
+								android:inputType = "textMultiLine"
+								android:textAlignment = "gravity"
+								android:textAppearance = "@style/TextAppearance.Material3.BodyMedium"
+								tools:text = "Review" />
+
+						</com.google.android.material.textfield.TextInputLayout>
+
+						<com.google.android.material.button.MaterialButton
+							android:layout_width = "wrap_content"
+							android:layout_height = "wrap_content"
+							android:layout_gravity = "end"
+							android:id = "@+id/submit_rating_and_review"
+							android:layout_margin = "@dimen/_4sdp"
+							android:text = "Submit" />
+					</LinearLayout>
+				</com.google.android.material.card.MaterialCardView>
+
+			</LinearLayout>
+
+
+		</androidx.core.widget.NestedScrollView>
+	</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+	<com.google.android.material.card.MaterialCardView
+		android:id = "@+id/bottom_app_bar"
+		android:layout_width = "match_parent"
+		android:layout_height = "wrap_content"
+		app:layout_constraintBottom_toBottomOf = "parent"
+		app:layout_constraintEnd_toEndOf = "parent"
+		app:layout_constraintStart_toStartOf = "parent">
+
+
+		<LinearLayout
+			android:layout_width = "match_parent"
+			android:layout_height = "wrap_content"
+			android:background = "?attr/colorSecondaryContainer"
+			android:orientation = "horizontal"
+			android:padding = "@dimen/_2sdp"
+
+
+			>
+
+			<com.google.android.material.imageview.ShapeableImageView
+				android:id = "@+id/action_open_shop"
+				android:layout_width = "@dimen/_48sdp"
+				android:layout_height = "@dimen/_48sdp"
+				android:contentDescription = "Shop"
+				android:padding = "@dimen/_4sdp"
+				android:scaleType = "centerCrop"
+				android:src = "@drawable/ic_user"
+
+				app:shapeAppearanceOverlay = "@style/Circular"
+				app:strokeColor = "?attr/colorOnSecondaryContainer"
+				app:strokeWidth = "2dp" />
+
+			<com.google.android.material.imageview.ShapeableImageView
+				android:id = "@+id/action_open_chat"
+				android:layout_width = "@dimen/_48sdp"
+				android:layout_height = "@dimen/_48sdp"
+				android:contentDescription = "Shop"
+				android:padding = "@dimen/_4sdp"
+				android:scaleType = "centerCrop"
+				android:src = "@drawable/ic_messages"
+				app:tint = "?attr/colorOnSecondaryContainer" />
+
+			<com.google.android.material.button.MaterialButton
+				android:id = "@+id/btn_buy_now"
+				style = "@style/Widget.Material3.Button.IconButton.Filled"
+				android:layout_width = "0dp"
+				android:layout_height = "@dimen/_48sdp"
+				android:layout_weight = "1"
+				android:backgroundTint = "?attr/colorSecondary"
+				android:text = "Buy"
+				android:textAlignment = "center"
+				android:textAppearance = "@style/TextAppearance.Material3.TitleLarge.Emphasized"
+				android:textColor = "?attr/colorOnSecondary"
+				app:cornerRadius = "4dp" />
+
+			<com.google.android.material.button.MaterialButton
+				android:id = "@+id/btn_add_to_cart"
+				style = "@style/Widget.Material3.Button.IconButton.Filled"
+				android:layout_width = "wrap_content"
+				android:layout_height = "@dimen/_48sdp"
+				android:backgroundTint = "?attr/colorPrimary"
+				android:text = "Add to Cart"
+				android:textAlignment = "center"
+				android:textAppearance = "@style/TextAppearance.Material3.TitleLarge.Emphasized"
+				android:textColor = "?attr/colorOnPrimary"
+				app:cornerRadius = "4dp" />
+
+		</LinearLayout>
+	</com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

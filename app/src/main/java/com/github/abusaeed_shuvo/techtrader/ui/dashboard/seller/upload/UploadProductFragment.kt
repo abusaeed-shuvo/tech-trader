@@ -34,9 +34,8 @@ class UploadProductFragment :
 		imagePickerHelper = ImagePickerHelper(this) { uri ->
 			if (uri != null) {
 				cameraImageUri = uri
-				Glide.with(requireContext()).load(uri)
-					.placeholder(R.drawable.ic_image_upload).error(R.drawable.ic_error)
-					.into(binding.ivProduct)
+				Glide.with(requireContext()).load(uri).placeholder(R.drawable.ic_image_upload)
+					.error(R.drawable.ic_error).into(binding.ivProduct)
 			}
 		}
 
@@ -62,13 +61,13 @@ class UploadProductFragment :
 				}
 
 				val product = Product(
-					name,
-					desc,
-					price,
-					quantity,
-					cameraImageUri.toString(),
-					sellerId,
-					UUID.randomUUID().toString()
+					name = name,
+					description = desc,
+					price = price,
+					quantity = quantity.toLong(),
+					imageLink = cameraImageUri.toString(),
+					sellerId = sellerId,
+					productId = UUID.randomUUID().toString()
 				)
 				uploadProduct(product)
 

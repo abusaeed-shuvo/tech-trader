@@ -56,18 +56,15 @@ class SellerProfileFragment :
 						userContainer.visibility = View.VISIBLE
 						progressIndicator.visibility = View.VISIBLE
 						progressIndicator.isIndeterminate = true
-
 					}
 
 					is DataState.Success -> {
-
 						userContainer.visibility = View.VISIBLE
 						progressIndicator.visibility = View.GONE
 						tvError.visibility = View.GONE
 						dataState.data?.let {
 							setUi(it)
 						}
-
 					}
 				}
 			}
@@ -89,12 +86,13 @@ class SellerProfileFragment :
 						btnSubmit.visibility = View.GONE
 					}
 				}
-
 			}
-
 		}
 		viewModel.tempName.observe(viewLifecycleOwner) {
 			binding.tvUserNameEdit.text = "Name: ${it}"
+		}
+		viewModel.tempShopName.observe(viewLifecycleOwner) {
+			binding.shopName.text = "Shop: ${it}"
 		}
 		viewModel.tempImageUri.observe(viewLifecycleOwner) {
 			Glide.with(requireContext()).load(it.toString())
@@ -120,7 +118,15 @@ class SellerProfileFragment :
 				}.setNegativeButton("Dismiss", null).show()
 		}
 		btnSellerNameChange.setOnClickListener {
-			displayNameEt()
+			displayNameEt {
+				viewModel.setTempName(it)
+
+			}
+		}
+		editShopName.setOnClickListener {
+			displayNameEt {
+				viewModel.setTempShopName(it)
+			}
 		}
 		selectImage.setOnClickListener {
 			imagePickerHelper.pickImage()
@@ -135,7 +141,9 @@ class SellerProfileFragment :
 	}
 
 
-	private fun displayNameEt() {
+	private fun displayNameEt(
+		onClickDone: (String) -> Unit
+	) {
 		val dialogBinding = DialogTextfieldInputBinding.inflate(
 			layoutInflater
 		)
@@ -143,7 +151,7 @@ class SellerProfileFragment :
 		MaterialAlertDialogBuilder(requireContext()).setTitle("Enter your name:")
 			.setView(dialogBinding.root).setPositiveButton("Confirm") { dialog, which ->
 				val newName = dialogBinding.etName.text.toString().trim()
-				viewModel.setTempName(newName)
+				onClickDone(newName)
 				dialog.dismiss()
 			}.setNegativeButton("Cancel", null).show()
 	}

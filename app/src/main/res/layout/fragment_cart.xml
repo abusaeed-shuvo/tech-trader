@@ -18,11 +18,9 @@
 			android:layout_width = "match_parent"
 			android:layout_height = "match_parent"
 			android:padding = "@dimen/_8sdp"
-			app:layoutManager = "androidx.recyclerview.widget.GridLayoutManager"
+			app:layoutManager = "androidx.recyclerview.widget.LinearLayoutManager"
 
-			app:spanCount = "2"
-
-			tools:listitem = "@layout/item_product" />
+			tools:listitem = "@layout/item_cart_product" />
 	</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 

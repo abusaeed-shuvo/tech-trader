@@ -87,6 +87,16 @@
 					app:strokeColor = "@color/black"
 					app:strokeWidth = "2dp" />
 
+				<TextView
+					android:id = "@+id/seller_id"
+					android:layout_width = "match_parent"
+					android:layout_height = "wrap_content"
+					android:padding = "@dimen/_16sdp"
+					android:text = "Id:"
+					android:textAlignment = "viewStart"
+					android:textAppearance = "@style/TextAppearance.Material3.BodySmall"
+					android:textColor = "?attr/colorOnPrimary" />
+
 				<com.google.android.material.card.MaterialCardView
 					android:id = "@+id/btn_seller_name_change"
 					android:layout_width = "match_parent"
@@ -125,6 +135,23 @@
 
 				</com.google.android.material.card.MaterialCardView>
 
+				<com.google.android.material.card.MaterialCardView
+					android:layout_width = "match_parent"
+					android:layout_height = "wrap_content"
+					android:layout_margin = "@dimen/_8sdp"
+					app:cardBackgroundColor = "?attr/colorPrimaryContainer"
+					app:cardCornerRadius = "@dimen/_16sdp">
+
+					<TextView
+						android:id = "@+id/seller_email"
+						android:layout_width = "match_parent"
+						android:layout_height = "wrap_content"
+						android:padding = "@dimen/_16sdp"
+						android:text = "Email:"
+						android:textAlignment = "viewStart"
+						android:textAppearance = "@style/TextAppearance.Material3.TitleMedium"
+						android:textColor = "?attr/colorOnPrimaryContainer" />
+				</com.google.android.material.card.MaterialCardView>
 			</LinearLayout>
 		</com.google.android.material.card.MaterialCardView>
 
@@ -140,42 +167,6 @@
 				android:layout_height = "wrap_content"
 				android:orientation = "vertical">
 
-				<com.google.android.material.card.MaterialCardView
-					android:layout_width = "match_parent"
-					android:layout_height = "wrap_content"
-					android:layout_marginTop = "@dimen/_8sdp"
-					app:cardBackgroundColor = "?attr/colorSecondary"
-					app:cardCornerRadius = "@dimen/_16sdp">
-
-					<TextView
-						android:id = "@+id/seller_id"
-						android:layout_width = "match_parent"
-						android:layout_height = "wrap_content"
-						android:padding = "@dimen/_16sdp"
-						android:text = "Id:"
-						android:textAlignment = "viewStart"
-						android:textAppearance = "@style/TextAppearance.Material3.TitleMedium"
-						android:textColor = "?attr/colorOnSecondary" />
-				</com.google.android.material.card.MaterialCardView>
-
-
-				<com.google.android.material.card.MaterialCardView
-					android:layout_width = "match_parent"
-					android:layout_height = "wrap_content"
-					android:layout_marginTop = "@dimen/_8sdp"
-					app:cardBackgroundColor = "?attr/colorSecondary"
-					app:cardCornerRadius = "@dimen/_16sdp">
-
-					<TextView
-						android:id = "@+id/seller_email"
-						android:layout_width = "match_parent"
-						android:layout_height = "wrap_content"
-						android:padding = "@dimen/_16sdp"
-						android:text = "Email:"
-						android:textAlignment = "viewStart"
-						android:textAppearance = "@style/TextAppearance.Material3.TitleMedium"
-						android:textColor = "?attr/colorOnSecondary" />
-				</com.google.android.material.card.MaterialCardView>
 
 				<com.google.android.material.card.MaterialCardView
 					android:layout_width = "match_parent"

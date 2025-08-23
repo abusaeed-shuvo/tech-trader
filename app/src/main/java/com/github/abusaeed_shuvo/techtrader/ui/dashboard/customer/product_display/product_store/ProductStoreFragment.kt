@@ -1,35 +1,38 @@
-package com.github.abusaeed_shuvo.techtrader.ui.dashboard.customer.product
+package com.github.abusaeed_shuvo.techtrader.ui.dashboard.customer.product_display.product_store
 
 import android.graphics.Color
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.abusaeed_shuvo.techtrader.base.BaseFragment
 import com.github.abusaeed_shuvo.techtrader.data.state.DataState
-import com.github.abusaeed_shuvo.techtrader.databinding.FragmentProductListBinding
+import com.github.abusaeed_shuvo.techtrader.databinding.FragmentProductStoreBinding
+import com.github.abusaeed_shuvo.techtrader.ui.dashboard.customer.product.ProductListViewModel
 import com.github.abusaeed_shuvo.techtrader.ui.dashboard.customer.product.components.CustomerProductItemAdapter
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
-
 
 @AndroidEntryPoint
-class ProductListFragment :
-	BaseFragment<FragmentProductListBinding>(FragmentProductListBinding::inflate) {
+class ProductStoreFragment :
+	BaseFragment<FragmentProductStoreBinding>(FragmentProductStoreBinding::inflate) {
 
 	private lateinit var adapter: CustomerProductItemAdapter
 	private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+	private val args: ProductStoreFragmentArgs by navArgs()
+	private lateinit var sId: String
 
-	@Inject
-	lateinit var auth: FirebaseAuth
+
 	private val viewModel: ProductListViewModel by viewModels()
 
 	override fun setListener() {
 		swipeRefreshLayout = binding.swipeToRefreshLayout
+		sId = args.storeId
+
 		adapter = CustomerProductItemAdapter(onClick = { product ->
 			val action =
-				ProductListFragmentDirections.actionProductListFragmentToProductDisplayFragment(
+				ProductStoreFragmentDirections.actionProductStoreFragmentToProductDisplayFragment(
 					productId = product.productId
 				)
 			findNavController().navigate(action)
@@ -37,23 +40,31 @@ class ProductListFragment :
 		binding.rcvProducts.adapter = adapter
 
 
-		viewModel.getAllProducts()
+		viewModel.getAllStoreItemsByID(sId)
 
 
 		swipeRefreshLayout.setOnRefreshListener {
-			viewModel.getAllProducts()
+			viewModel.getAllStoreItemsByID(sId)
 
 		}
 		swipeRefreshLayout.setColorSchemeColors(
 			Color.RED, Color.GREEN, Color.BLUE
 		)
 		swipeRefreshLayout.setProgressBackgroundColorSchemeColor(Color.LTGRAY)
+		requireActivity().onBackPressedDispatcher.addCallback(
+			viewLifecycleOwner,
+			object : OnBackPressedCallback(true) {
+				override fun handleOnBackPressed() {
+					findNavController().popBackStack()
+				}
+
+			})
 	}
 
 	override fun setObserver() {
-		viewModel.productResponse.observe(viewLifecycleOwner) {
+		viewModel.storeProductResponse.observe(viewLifecycleOwner) {
 			when (it) {
-				is DataState.Error   -> {
+				is DataState.Error -> {
 					swipeRefreshLayout.isRefreshing = false
 					Snackbar.make(binding.root, "Error: ${it.message}", Snackbar.LENGTH_SHORT)
 						.show()

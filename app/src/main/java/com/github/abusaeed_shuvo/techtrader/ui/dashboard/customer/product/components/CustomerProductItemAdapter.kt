@@ -1,4 +1,4 @@
-package com.github.abusaeed_shuvo.techtrader.ui.dashboard.seller.product.components
+package com.github.abusaeed_shuvo.techtrader.ui.dashboard.customer.product.components
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,41 +9,46 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.github.abusaeed_shuvo.techtrader.R
 import com.github.abusaeed_shuvo.techtrader.data.models.Product
-import com.github.abusaeed_shuvo.techtrader.databinding.ItemProductBinding
+import com.github.abusaeed_shuvo.techtrader.databinding.ItemCustomerProductBinding
 
-
-class ProductListAdapter(
+class CustomerProductItemAdapter
+	(
 	val onClick: (Product) -> Unit
 ) :
 	ListAdapter<
-			Product, ProductListAdapter.ProductVH>(ADiffCallBack()) {
+			Product, CustomerProductItemAdapter.CustomerProductVH>(ADiffCallBack()) {
 	override fun onCreateViewHolder(
 		parent: ViewGroup, viewType: Int
-	): ProductVH {
-		return ProductVH(
-			ItemProductBinding.inflate(
+	): CustomerProductVH {
+		return CustomerProductVH(
+			ItemCustomerProductBinding.inflate(
 				LayoutInflater.from(parent.context), parent, false
 			)
 		)
 	}
 
 	override fun onBindViewHolder(
-		holder: ProductVH, position: Int
+		holder: CustomerProductVH,
+		position: Int
 	) {
-		val notification = getItem(position)
-		holder.bind(notification)
+		val product = getItem(position)
+		holder.bind(product)
 	}
 
-	inner class ProductVH(private val binding: ItemProductBinding) :
+
+	inner class CustomerProductVH(private val binding: ItemCustomerProductBinding) :
 		RecyclerView.ViewHolder(binding.root) {
 		fun bind(product: Product) = with(binding) {
-			productName.text = product.name
-			productDesc.text = product.description
-			productPrice.text = "Price: ${product.price}$"
-			productQuantity.text = "Quantity: ${product.quantity}"
+			productNameTv.text = product.name
+			productPriceTv.text = "Price: ${product.price}$"
+			productRatingsTv.text = "⭐${product.avgRating} (${product.ratingCount})"
+			if (product.discount > 0 && product.discount <= 100) {
+				productDiscountTv.text = "-${product.discount}"
+			}
+
 			Glide.with(binding.root.context).load(product.imageLink.toUri())
 				.placeholder(R.drawable.ic_image_upload)
-				.error(R.drawable.ic_image_upload).into(productImage)
+				.error(R.drawable.ic_image_upload).into(productImg)
 			root.setOnClickListener {
 				onClick(product)
 			}

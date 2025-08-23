@@ -8,8 +8,12 @@
 	<fragment
 		android:id = "@+id/productListFragment"
 		android:name = "com.github.abusaeed_shuvo.techtrader.ui.dashboard.customer.product.ProductListFragment"
-		android:label = "Products"
-		tools:layout = "@layout/fragment_product_list" />
+		android:label = "Home"
+		tools:layout = "@layout/fragment_product_list">
+		<action
+			android:id = "@+id/action_productListFragment_to_productDisplayFragment"
+			app:destination = "@id/productDisplayFragment" />
+	</fragment>
 	<fragment
 		android:id = "@+id/cartFragment"
 		android:name = "com.github.abusaeed_shuvo.techtrader.ui.dashboard.customer.cart.CartFragment"
@@ -20,4 +24,40 @@
 		android:name = "com.github.abusaeed_shuvo.techtrader.ui.dashboard.customer.profile.CustomerProfileFragment"
 		android:label = "Profile"
 		tools:layout = "@layout/fragment_customer_profile" />
+	<fragment
+		android:id = "@+id/customerMessageFragment"
+		android:name = "com.github.abusaeed_shuvo.techtrader.ui.dashboard.message.CustomerMessageFragment"
+		android:label = "Messages"
+		tools:layout = "@layout/fragment_customer_message" />
+	<fragment
+		android:id = "@+id/customerWishlistFragment"
+		android:name = "com.github.abusaeed_shuvo.techtrader.ui.dashboard.customer.wishlist.CustomerWishlistFragment"
+		android:label = "Wishlist"
+		tools:layout = "@layout/fragment_customer_wishlist" />
+	<fragment
+		android:id = "@+id/productDisplayFragment"
+		android:name = "com.github.abusaeed_shuvo.techtrader.ui.dashboard.customer.product_display.ProductDisplayFragment"
+		android:label = "Product Item"
+		tools:layout = "@layout/fragment_product_display">
+		<argument
+			android:name = "productId"
+			app:argType = "string"
+			android:defaultValue = '"_"' />
+		<action
+			android:id = "@+id/action_productDisplayFragment_to_productStoreFragment"
+			app:destination = "@id/productStoreFragment" />
+	</fragment>
+	<fragment
+		android:id = "@+id/productStoreFragment"
+		android:name = "com.github.abusaeed_shuvo.techtrader.ui.dashboard.customer.product_display.product_store.ProductStoreFragment"
+		android:label = "Store"
+		tools:layout = "@layout/fragment_product_store">
+		<action
+			android:id = "@+id/action_productStoreFragment_to_productDisplayFragment"
+			app:destination = "@id/productDisplayFragment" />
+		<argument
+			android:name = "storeId"
+			app:argType = "string"
+			android:defaultValue = '""' />
+	</fragment>
 </navigation>

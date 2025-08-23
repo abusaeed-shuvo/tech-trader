@@ -4,8 +4,13 @@ data class Product(
 	var name: String = "",
 	var description: String = "",
 	var price: Double = 0.0,
-	var quantity: Int = 0,
+	var quantity: Long = 0,
+	var avgRating: Double = 0.0,
+	var sold: Long = 0,
+	var visitCount: Long = 0,
+	var ratingCount: Long = 0,
+	var discount: Int = 0,
 	var imageLink: String = "",
 	var sellerId: String = "",
-	var productId: String = ""
+	val productId: String = "",
 )

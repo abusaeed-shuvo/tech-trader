@@ -54,6 +54,18 @@
 			app:layout_constraintTop_toTopOf = "@id/user_container"
 			app:tint = "?attr/colorOnPrimary" />
 
+		<TextView
+			android:elevation = "@dimen/_200sdp"
+			android:id = "@+id/seller_id"
+			android:layout_width = "match_parent"
+			android:layout_height = "wrap_content"
+			android:padding = "@dimen/_16sdp"
+			android:text = "Id:"
+			android:textAlignment = "viewStart"
+			android:textAppearance = "@style/TextAppearance.Material3.BodySmall"
+			android:textColor = "?attr/colorOnPrimary"
+			app:layout_constraintStart_toStartOf = "@id/user_container"
+			app:layout_constraintTop_toTopOf = "@id/user_container" />
 
 		<com.google.android.material.card.MaterialCardView
 			android:id = "@+id/user_container"
@@ -125,69 +137,27 @@
 
 				</com.google.android.material.card.MaterialCardView>
 
+				<com.google.android.material.card.MaterialCardView
+					android:layout_width = "match_parent"
+					android:layout_height = "wrap_content"
+					android:layout_margin = "@dimen/_8sdp"
+					app:cardBackgroundColor = "?attr/colorPrimaryContainer"
+					app:cardCornerRadius = "@dimen/_16sdp">
+
+					<TextView
+						android:id = "@+id/seller_email"
+						android:layout_width = "match_parent"
+						android:layout_height = "wrap_content"
+						android:padding = "@dimen/_16sdp"
+						android:text = "Email:"
+						android:textAlignment = "viewStart"
+						android:textAppearance = "@style/TextAppearance.Material3.TitleMedium"
+						android:textColor = "?attr/colorOnPrimaryContainer" />
+				</com.google.android.material.card.MaterialCardView>
+
 			</LinearLayout>
 		</com.google.android.material.card.MaterialCardView>
 
-		<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-			android:layout_width = "match_parent"
-			android:layout_height = "0dp"
-			app:layout_constraintBottom_toTopOf = "@id/btn_logout"
-			app:layout_constraintTop_toBottomOf = "@id/user_container">
-
-
-			<androidx.core.widget.NestedScrollView
-				android:id = "@+id/detail_container"
-				android:layout_width = "match_parent"
-				android:layout_height = "wrap_content">
-
-
-				<LinearLayout
-					android:layout_width = "match_parent"
-					android:layout_height = "wrap_content"
-					android:orientation = "vertical">
-
-					<com.google.android.material.card.MaterialCardView
-						android:layout_width = "match_parent"
-						android:layout_height = "wrap_content"
-						android:layout_marginTop = "@dimen/_8sdp"
-						app:cardBackgroundColor = "?attr/colorSecondary"
-						app:cardCornerRadius = "@dimen/_16sdp">
-
-						<TextView
-							android:id = "@+id/seller_id"
-							android:layout_width = "match_parent"
-							android:layout_height = "wrap_content"
-							android:padding = "@dimen/_16sdp"
-							android:text = "Id:"
-							android:textAlignment = "viewStart"
-							android:textAppearance = "@style/TextAppearance.Material3.TitleMedium"
-							android:textColor = "?attr/colorOnSecondary" />
-					</com.google.android.material.card.MaterialCardView>
-
-
-					<com.google.android.material.card.MaterialCardView
-						android:layout_width = "match_parent"
-						android:layout_height = "wrap_content"
-						android:layout_marginTop = "@dimen/_8sdp"
-						app:cardBackgroundColor = "?attr/colorSecondary"
-						app:cardCornerRadius = "@dimen/_16sdp">
-
-						<TextView
-							android:id = "@+id/seller_email"
-							android:layout_width = "match_parent"
-							android:layout_height = "wrap_content"
-							android:padding = "@dimen/_16sdp"
-							android:text = "Email:"
-							android:textAlignment = "viewStart"
-							android:textAppearance = "@style/TextAppearance.Material3.TitleMedium"
-							android:textColor = "?attr/colorOnSecondary" />
-					</com.google.android.material.card.MaterialCardView>
-
-
-				</LinearLayout>
-
-			</androidx.core.widget.NestedScrollView>
-		</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 		<com.google.android.material.button.MaterialButton
 			android:id = "@+id/btn_submit"

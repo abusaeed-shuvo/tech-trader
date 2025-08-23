@@ -1,6 +1,7 @@
 package com.github.abusaeed_shuvo.techtrader.ui.dashboard.customer
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -49,6 +50,19 @@ class CustomerDashboard : AppCompatActivity() {
 
 		binding.customerBtmNav.setupWithNavController(navController)
 		setupActionBarWithNavController(navController, appBarConfiguration)
+
+		navController.addOnDestinationChangedListener { controller, destination, arguments ->
+			when (destination.id) {
+				R.id.cartFragment, R.id.productListFragment, R.id.customerMessageFragment,
+				R.id.customerProfileFragment -> {
+					binding.customerBtmNav.visibility = View.VISIBLE
+				}
+
+				else                         -> {
+					binding.customerBtmNav.visibility = View.GONE
+				}
+			}
+		}
 
 	}
 

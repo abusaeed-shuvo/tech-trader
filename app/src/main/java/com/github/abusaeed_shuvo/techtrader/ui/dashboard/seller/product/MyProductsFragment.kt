@@ -25,7 +25,7 @@ class MyProductsFragment :
 
 	override fun setListener() {
 		swipeRefreshLayout = binding.swipeToRefreshLayout
-		adapter = ProductListAdapter()
+		adapter = ProductListAdapter(onClick = {})
 		binding.rcvProducts.adapter = adapter
 
 		auth.currentUser?.let { user ->

@@ -27,6 +27,9 @@ class SellerProfileViewModel @Inject constructor(
 	private val _tempName = MutableLiveData<String>()
 	val tempName = _tempName
 
+	private val _tempShopName = MutableLiveData<String>()
+	val tempShopName = _tempShopName
+
 	private val _tempImageUri = MutableLiveData<Uri>()
 	val tempImageUri = _tempImageUri
 
@@ -34,6 +37,11 @@ class SellerProfileViewModel @Inject constructor(
 
 	fun setTempName(name: String) {
 		_tempName.value = name
+		checkIfUserChanged()
+	}
+
+	fun setTempShopName(name: String) {
+		_tempShopName.value = name
 		checkIfUserChanged()
 	}
 

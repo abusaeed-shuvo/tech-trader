@@ -15,10 +15,13 @@ class ProductListViewModel
 ) : ViewModel() {
 
 	private val _productResponse = MutableLiveData<DataState<List<Product>>>()
-
 	val productResponse = _productResponse
 
-	fun getProductById(userId: String) {
+	private val _storeProductResponse = MutableLiveData<DataState<List<Product>>>()
+	val storeProductResponse = _storeProductResponse
+
+
+	fun getAllProducts() {
 		_productResponse.postValue(DataState.Loading())
 
 		repository.getAllProducts().addOnSuccessListener { documentSnapshots ->
@@ -33,6 +36,20 @@ class ProductListViewModel
 		}.addOnFailureListener { exception ->
 			_productResponse.postValue(DataState.Error("${exception.message}"))
 
+		}
+	}
+
+	fun getAllStoreItemsByID(storeId: String) {
+		_storeProductResponse.postValue(DataState.Loading())
+
+		repository.getAllProductByStoreId(storeId).addOnSuccessListener { documentSnapshots ->
+
+			documentSnapshots.toObjects(Product::class.java).let {
+				_storeProductResponse.postValue(DataState.Success(it))
+			}
+
+		}.addOnFailureListener { exception ->
+			_storeProductResponse.postValue(DataState.Error(exception.message))
 		}
 	}
 

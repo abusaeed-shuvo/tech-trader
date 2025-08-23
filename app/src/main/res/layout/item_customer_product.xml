@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android = "http://schemas.android.com/apk/res/android"
+	xmlns:tools = "http://schemas.android.com/tools"
+	android:layout_width = "match_parent"
+	android:layout_height = "wrap_content"
+
+	android:layout_margin = "@dimen/_4sdp"
+	android:backgroundTint = "?attr/colorSurface">
+
+	<LinearLayout
+		android:layout_width = "match_parent"
+		android:layout_height = "wrap_content"
+
+		android:orientation = "vertical">
+
+		<com.google.android.material.imageview.ShapeableImageView
+			android:id = "@+id/product_img"
+			android:layout_width = "match_parent"
+			android:layout_height = "@dimen/_150sdp"
+			android:scaleType = "centerCrop"
+			android:backgroundTint = "?attr/colorSecondaryContainer"
+			android:contentDescription = "Product Image"
+			android:src = "@drawable/image_placeholder" />
+
+		<LinearLayout
+			android:background = "?attr/colorPrimaryContainer"
+			android:layout_width = "match_parent"
+			android:layout_height = "wrap_content"
+			android:orientation = "vertical"
+			android:padding = "@dimen/_4sdp">
+
+
+			<TextView
+				android:id = "@+id/product_name_tv"
+				android:layout_width = "match_parent"
+				android:layout_height = "wrap_content"
+				android:layout_marginBottom = "@dimen/_2sdp"
+				android:ellipsize = "end"
+				android:maxLines = "1"
+				android:paddingHorizontal = "@dimen/_6sdp"
+				android:textAlignment = "viewStart"
+				android:textAppearance = "@style/TextAppearance.Material3.TitleMedium.Emphasized"
+				android:textColor = "?attr/colorOnPrimaryContainer"
+				tools:text = "Product name:" />
+
+			<LinearLayout
+				android:layout_width = "match_parent"
+				android:layout_height = "wrap_content"
+				android:gravity = "start"
+				android:orientation = "horizontal"
+				android:paddingHorizontal = "@dimen/_6sdp"
+
+				>
+
+				<TextView
+					android:id = "@+id/product_price_tv"
+					android:layout_width = "wrap_content"
+					android:layout_height = "wrap_content"
+					android:ellipsize = "end"
+					android:maxLines = "1"
+					android:textAlignment = "viewStart"
+					android:textAppearance = "@style/TextAppearance.Material3.TitleMedium.Emphasized"
+					android:textColor = "?attr/colorPrimary"
+					tools:text = "$240" />
+
+				<TextView
+					android:id = "@+id/product_discount_tv"
+					android:layout_width = "wrap_content"
+					android:layout_height = "wrap_content"
+					android:layout_marginStart = "@dimen/_6sdp"
+					android:backgroundTint = "?attr/colorPrimaryVariant"
+					android:ellipsize = "end"
+					android:maxLines = "1"
+					android:textAlignment = "viewStart"
+					android:textAppearance = "@style/TextAppearance.Material3.TitleMedium.Emphasized"
+					android:textColor = "?attr/colorOnPrimaryFixedVariant"
+					tools:text = "-40%" />
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width = "match_parent"
+				android:layout_height = "wrap_content"
+				android:gravity = "start"
+				android:orientation = "horizontal"
+				android:paddingHorizontal = "@dimen/_6sdp"
+
+				>
+
+				<TextView
+					android:id = "@+id/product_ratings_tv"
+					android:layout_width = "wrap_content"
+					android:layout_height = "wrap_content"
+					android:ellipsize = "end"
+					android:maxLines = "1"
+					android:textAlignment = "viewStart"
+					android:textAppearance = "@style/TextAppearance.Material3.TitleMedium"
+					android:textColor = "?attr/colorOnPrimaryContainer"
+					tools:text = "⭐Ratings" />
+
+				<TextView
+					android:id = "@+id/product_sold_tv"
+					android:layout_width = "wrap_content"
+					android:layout_height = "wrap_content"
+					android:layout_marginStart = "@dimen/_6sdp"
+					android:ellipsize = "end"
+					android:maxLines = "1"
+					android:textAlignment = "viewStart"
+					android:textAppearance = "@style/TextAppearance.Material3.TitleMedium"
+					android:textColor = "?attr/colorOnPrimaryContainer"
+					tools:text = "100 sold" />
+			</LinearLayout>
+
+		</LinearLayout>
+
+	</LinearLayout>
+</com.google.android.material.card.MaterialCardView>
