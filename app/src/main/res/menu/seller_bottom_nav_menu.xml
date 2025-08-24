@@ -7,6 +7,10 @@
 		android:icon = "@drawable/ic_products"
 		android:title = "Products" />
 	<item
+		android:id = "@+id/chatListFragment"
+		android:icon = "@drawable/ic_messages"
+		android:title = "Messages" />
+	<item
 		android:id = "@+id/uploadProductFragment"
 		android:icon = "@drawable/ic_add_product"
 		android:title = "Upload" />

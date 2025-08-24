@@ -2,6 +2,7 @@ package com.github.abusaeed_shuvo.techtrader.di
 
 import com.github.abusaeed_shuvo.techtrader.data.repository.AuthRepository
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -42,5 +43,9 @@ class FirebaseModule {
 		return FirebaseStorage.getInstance().reference
 	}
 
-
+	@Provides
+	@Singleton
+	fun providesFirebaseDatabase(): FirebaseDatabase {
+		return FirebaseDatabase.getInstance()
+	}
 }

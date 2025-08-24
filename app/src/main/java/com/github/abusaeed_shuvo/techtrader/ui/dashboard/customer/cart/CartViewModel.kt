@@ -17,6 +17,7 @@ import javax.inject.Inject
 class CartViewModel @Inject constructor(
 	private val repository: CartRepository
 ) : ViewModel() {
+	val TAG = "CART"
 	private val _cartListResponse = MutableLiveData<DataState<List<CartEntryLocal>>>()
 	val cartListResponse = _cartListResponse
 
@@ -43,7 +44,8 @@ class CartViewModel @Inject constructor(
 									productImage = product.imageLink,
 									price = product.price,
 									quantity = cartEntry.quantity,
-									totalPrice = product.price * cartEntry.quantity
+									totalPrice = product.price * cartEntry.quantity,
+									availableQuantity = product.quantity - product.sold
 								)
 							} else {
 								CartEntryLocal(
@@ -52,7 +54,8 @@ class CartViewModel @Inject constructor(
 									productName = "The product has been removed from store",
 									productImage = "",
 									price = 0.0,
-									totalPrice = 0.0
+									totalPrice = 0.0,
+									availableQuantity = 0
 								)
 							}
 							cartList.add(cartEntryLocal)
@@ -62,7 +65,6 @@ class CartViewModel @Inject constructor(
 					}
 				}
 
-				// ✅ Wait until *all* product fetches complete
 				Tasks.whenAllComplete(tasks).addOnSuccessListener {
 					_cartListResponse.postValue(DataState.Success(cartList))
 				}.addOnFailureListener { exception ->
@@ -74,6 +76,21 @@ class CartViewModel @Inject constructor(
 			}
 	}
 
+	fun updateItemQuantity(pId: String, newQuantity: Long): Task<Void?>? {
+		return repository.updateCartItemQuantity(pId, newQuantity)
+	}
 
+	fun emptyCart(): Task<Void?>? {
+		return repository.emptyCart()
+	}
+
+	fun removeCartItem(item: CartEntryLocal): Task<Void?>? {
+		val remoteItem = CartEntry(
+			productId = item.productId,
+			quantity = item.quantity
+		)
+
+		return repository.removeFromCart(remoteItem)
+	}
 }
 

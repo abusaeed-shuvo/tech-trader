@@ -9,5 +9,8 @@ object Nodes {
 	const val USER_TYPE = "userType"
 	const val RATINGS = "ratings"
 	const val TIME_STAMP = "timeStamp"
-	const val CART="cart"
+	const val CART = "cart"
+	const val CHAT_LIST = "chatList"
+	const val CHATS = "chats"
+	const val MESSAGES = "messages"
 }

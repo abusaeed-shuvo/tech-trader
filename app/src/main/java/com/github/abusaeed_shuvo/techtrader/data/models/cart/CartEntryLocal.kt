@@ -6,5 +6,6 @@ data class CartEntryLocal(
 	var productImage: String,
 	var price: Double = 0.0,
 	var quantity: Long = 0,
-	var totalPrice: Double = 0.0
+	var totalPrice: Double = 0.0,
+	var availableQuantity: Long = 0
 )

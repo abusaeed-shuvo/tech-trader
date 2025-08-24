@@ -18,6 +18,7 @@ import com.github.abusaeed_shuvo.techtrader.data.models.UserEntity
 import com.github.abusaeed_shuvo.techtrader.data.models.cart.CartEntry
 import com.github.abusaeed_shuvo.techtrader.data.state.DataState
 import com.github.abusaeed_shuvo.techtrader.databinding.FragmentProductDisplayBinding
+import com.github.abusaeed_shuvo.techtrader.libs.getConversationId
 import com.github.abusaeed_shuvo.techtrader.ui.dashboard.customer.product_display.components.ReviewItemAdapter
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -34,6 +35,7 @@ class ProductDisplayFragment :
 	private lateinit var pid: String
 	private lateinit var uid: String
 	private var userName: String = ""
+	private var userImg: String = ""
 	private lateinit var adapter: ReviewItemAdapter
 
 	@Inject
@@ -129,6 +131,7 @@ class ProductDisplayFragment :
 				is DataState.Success -> {
 					dataState.data?.let {
 						userName = it.name
+						userImg = it.profileImageLink
 					}
 				}
 			}
@@ -208,6 +211,25 @@ class ProductDisplayFragment :
 					)
 
 				findNavController().navigate(action)
+			}
+			actionOpenChat.setOnClickListener {
+
+				viewModel.createChatRoom(
+					uId = uid,
+					pId = shop.id,
+					uNm = userName,
+					sNm = shop.name,
+					uImg = userImg,
+					sImg = shop.profileImageLink
+				).addOnSuccessListener {
+					val cId = getConversationId(uid, shop.id)
+					val action =
+						ProductDisplayFragmentDirections.actionProductDisplayFragmentToMessageListFragment(
+							cId
+						)
+					findNavController().navigate(action)
+
+				}
 			}
 		}
 	}

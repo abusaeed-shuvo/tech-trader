@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -56,7 +57,18 @@ class SellerDashboard : AppCompatActivity() {
 		binding.bottomNav.setupWithNavController(navController)
 		setupActionBarWithNavController(navController, appBarConfiguration)
 
+		navController.addOnDestinationChangedListener { controller, destination, arguments ->
+			when (destination.id) {
+				R.id.myProductsFragment, R.id.uploadProductFragment, R.id.chatListFragment,
+				R.id.sellerProfileFragment -> {
+					binding.bottomNav.visibility = View.VISIBLE
+				}
 
+				else                       -> {
+					binding.bottomNav.visibility = View.GONE
+				}
+			}
+		}
 	}
 
 	override fun onSupportNavigateUp(): Boolean {

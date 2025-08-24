@@ -6,6 +6,6 @@ import com.google.firebase.firestore.QuerySnapshot
 
 interface CartService {
 	fun addToCart(cartItem: CartEntry): Task<Void?>?
-	fun removeFromCart(uId: String, cartEntry: CartEntry): Task<Void?>?
+	fun removeFromCart(cartEntry: CartEntry): Task<Void?>?
 	fun getAllCartItems(): Task<QuerySnapshot?>?
 }

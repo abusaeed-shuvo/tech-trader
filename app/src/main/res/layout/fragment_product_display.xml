@@ -255,23 +255,12 @@
 				android:src = "@drawable/ic_messages"
 				app:tint = "?attr/colorOnSecondaryContainer" />
 
-			<com.google.android.material.button.MaterialButton
-				android:id = "@+id/btn_buy_now"
-				style = "@style/Widget.Material3.Button.IconButton.Filled"
-				android:layout_width = "0dp"
-				android:layout_height = "@dimen/_48sdp"
-				android:layout_weight = "1"
-				android:backgroundTint = "?attr/colorSecondary"
-				android:text = "Buy"
-				android:textAlignment = "center"
-				android:textAppearance = "@style/TextAppearance.Material3.TitleLarge.Emphasized"
-				android:textColor = "?attr/colorOnSecondary"
-				app:cornerRadius = "4dp" />
 
 			<com.google.android.material.button.MaterialButton
 				android:id = "@+id/btn_add_to_cart"
 				style = "@style/Widget.Material3.Button.IconButton.Filled"
-				android:layout_width = "wrap_content"
+				android:layout_width = "0dp"
+				android:layout_weight = "1"
 				android:layout_height = "@dimen/_48sdp"
 				android:backgroundTint = "?attr/colorPrimary"
 				android:text = "Add to Cart"

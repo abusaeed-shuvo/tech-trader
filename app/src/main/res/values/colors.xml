@@ -2,6 +2,8 @@
 <resources>
 	<color name = "black">#FF000000</color>
 	<color name = "white">#FFFFFFFF</color>
+	<color name = "sent">#536DFE</color>
+	<color name = "received">#00BFA5</color>
 	<array name = "progress_colors">
 		<item>#6200EA</item>
 		<item>#DD2C00</item>

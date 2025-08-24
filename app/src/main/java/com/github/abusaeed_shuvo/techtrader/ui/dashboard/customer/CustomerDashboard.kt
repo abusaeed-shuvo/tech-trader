@@ -53,7 +53,7 @@ class CustomerDashboard : AppCompatActivity() {
 
 		navController.addOnDestinationChangedListener { controller, destination, arguments ->
 			when (destination.id) {
-				R.id.cartFragment, R.id.productListFragment, R.id.customerMessageFragment,
+				R.id.cartFragment, R.id.productListFragment, R.id.chatListFragment,
 				R.id.customerProfileFragment -> {
 					binding.customerBtmNav.visibility = View.VISIBLE
 				}

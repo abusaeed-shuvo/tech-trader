@@ -7,6 +7,7 @@ import com.github.abusaeed_shuvo.techtrader.data.models.Product
 import com.github.abusaeed_shuvo.techtrader.data.models.Rating
 import com.github.abusaeed_shuvo.techtrader.data.models.UserEntity
 import com.github.abusaeed_shuvo.techtrader.data.models.cart.CartEntry
+import com.github.abusaeed_shuvo.techtrader.data.repository.ChatRepository
 import com.github.abusaeed_shuvo.techtrader.data.repository.CustomerRepository
 import com.github.abusaeed_shuvo.techtrader.data.state.DataState
 import com.google.android.gms.tasks.Task
@@ -15,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProductDisplayViewModel @Inject constructor(
-	private val repository: CustomerRepository
+	private val repository: CustomerRepository,
+	private val chat: ChatRepository
 ) : ViewModel() {
 	private val _productQueryResponse = MutableLiveData<DataState<Product>>()
 	val productQueryResponse = _productQueryResponse
@@ -115,6 +117,24 @@ class ProductDisplayViewModel @Inject constructor(
 			}.addOnFailureListener {
 				_itemStateInCart.postValue(DataState.Success(false))
 			}
+	}
+
+	fun createChatRoom(
+		uId: String,
+		pId: String,
+		uNm: String,
+		sNm: String,
+		uImg: String,
+		sImg: String
+	): Task<Void?> {
+		return chat.createChatRoom(
+			uId,
+			pId,
+			sName = uNm,
+			pName = sNm,
+			sImg = uImg,
+			pImg = sImg,
+		)
 	}
 
 }

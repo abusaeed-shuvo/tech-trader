@@ -37,7 +37,7 @@ class CartRepository @Inject constructor(
 	}
 
 	override fun removeFromCart(
-		uId: String, cartEntry: CartEntry
+		cartEntry: CartEntry
 	): Task<Void?>? {
 		return cartRef()
 			?.document(cartEntry.productId)
@@ -60,6 +60,14 @@ class CartRepository @Inject constructor(
 
 		return db.collection(Nodes.PRODUCT).document(pId).get()
 
+	}
+
+	fun emptyCart(): Task<Void?>? {
+		return cartRef()?.get()?.continueWithTask { snapshot ->
+			val batch = getDBBatch()
+			snapshot.result?.documents?.forEach { batch.delete(it.reference) }
+			batch.commit()
+		}
 	}
 
 }

@@ -7,3 +7,12 @@ data class ChatMessage(
 	val text: String = "",
 	val timestamp: Long = System.currentTimeMillis()
 )
+
+fun ChatMessage.toLocal(sId: String): MessageLocalDisplay {
+	return MessageLocalDisplay(
+		id = id,
+		message = text,
+		timeStamp = timestamp,
+		messageType = if (sId == senderId) MessageType.SENT else MessageType.RECEIVED
+	)
+}

@@ -99,3 +99,7 @@ fun showNotification(context: Context, title: String?, body: String?) {
 
 	manager.notify(id, builder.build())
 }
+
+fun getConversationId(user1: String, user2: String): String {
+	return if (user1 < user2) "${user1}_$user2" else "${user2}_$user1"
+}

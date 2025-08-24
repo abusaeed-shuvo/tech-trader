@@ -20,4 +20,22 @@
 		android:name = "com.github.abusaeed_shuvo.techtrader.ui.dashboard.seller.upload.UploadProductFragment"
 		android:label = "Upload Product"
 		tools:layout = "@layout/fragment_upload_product" />
+	<fragment
+		android:id = "@+id/chatListFragment"
+		android:name = "com.github.abusaeed_shuvo.techtrader.ui.dashboard.message.chat_list.ChatListFragment"
+		android:label = "Messages"
+		tools:layout = "@layout/fragment_chat_list">
+		<action
+			android:id = "@+id/action_chatListFragment_to_messageListFragment"
+			app:destination = "@id/messageListFragment" />
+	</fragment>
+	<fragment
+		android:id = "@+id/messageListFragment"
+		android:name = "com.github.abusaeed_shuvo.techtrader.ui.dashboard.message.message_list.MessageListFragment"
+		android:label = "Chat Message"
+		tools:layout = "@layout/fragment_message_list">
+		<argument
+			android:name = "conversationId"
+			app:argType = "string" />
+	</fragment>
 </navigation>
